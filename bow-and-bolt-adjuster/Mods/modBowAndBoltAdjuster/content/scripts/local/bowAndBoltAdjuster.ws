@@ -130,16 +130,15 @@ function ResetAllSettings()
 function PlayOwnerReloadAnim() : bool
 {
 	var n : int;
-	if (!BBA_On())
-	{
-		shotCountLimit = 1;
-		return wrappedMethod();
-	}
-	n = BBA_Shots();
+	var r : bool;
+	n = 1;
+	if (BBA_On())
+		n = BBA_Shots();
 	if (n < 0)
-		return false; // Automatik: sofort nachgeladen, ohne Animation
+		n = 1000000; // Automatik: praktisch nie nachladen
 	shotCountLimit = n;
-	return wrappedMethod();
+	r = wrappedMethod();
+	return r;
 }
 
 // ---------- Bolzen-Geschwindigkeit ----------
