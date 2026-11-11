@@ -188,7 +188,7 @@ function UP_BuildMenuOptions(storage : CScriptedFlashValueStorage) : CScriptedFl
 	return root.GetMemberFlashArray("subElements");
 }
 
-// Gemeinsames "Mod Menu" (id "djmods_menu") fuer alle Mods aus djdomi/witcher3-mods:
+// Gemeinsames "Mod Menu" (id "djdomi_modmenu") fuer alle Mods aus djdomi/witcher3-mods:
 // gibt es den Eintrag schon (von einer anderen Mod), haengen wir uns darunter,
 // sonst legen wir ihn an (nach "Cheats", sonst nach "Einstellungen").
 @wrapMethod(IngameMenuStructureCreator)
@@ -222,7 +222,7 @@ function PopulateMenuData() : CScriptedFlashArray
 		if (!menuItem)
 			continue;
 		id = menuItem.GetMemberFlashString("id");
-		if (id == "djmods_menu")
+		if (id == "djdomi_modmenu")
 		{
 			subs = menuItem.GetMemberFlashArray("subElements");
 			subs.PushBackFlashObject(upItem);
@@ -234,7 +234,7 @@ function PopulateMenuData() : CScriptedFlashArray
 	}
 
 	// Nein: anlegen
-	modMenu = CreateMenuItem("djmods_menu", "Mod Menu", NameToFlashUInt('DJModsMenu'), IGMActionType_MenuHolder, false, "Mod Menu");
+	modMenu = CreateMenuItem("djdomi_modmenu", "Mod Menu", NameToFlashUInt('DjdomiModMenu'), IGMActionType_MenuHolder, false, "Mod Menu");
 	modMenu.SetMemberFlashString("label", "Mod Menu");
 	modMenu.SetMemberFlashString("listTitle", "Mod Menu");
 	subs = m_flashValueStorage.CreateTempFlashArray();
