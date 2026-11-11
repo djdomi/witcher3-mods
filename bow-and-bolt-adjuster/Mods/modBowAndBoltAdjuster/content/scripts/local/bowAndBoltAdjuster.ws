@@ -16,7 +16,7 @@ function BBA_On() : bool
 {
 	var s : string;
 	s = theGame.GetInGameConfigWrapper().GetVarValue('BBA_Bow', 'BBA_Enabled');
-	return s == "true" || s == "1";
+	return s != "false" && s != "0"; // leer = an (Standard)
 }
 
 // Schuesse vor dem Nachladen. -1 = Automatik (nie nachladen)

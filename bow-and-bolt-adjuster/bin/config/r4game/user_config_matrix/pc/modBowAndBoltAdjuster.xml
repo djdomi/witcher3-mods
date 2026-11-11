@@ -1,58 +1,44 @@
-<?xml version="1.0" encoding="UTF-16"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- https://github.com/djdomi/witcher3-mods - License: AGPL-3.0 -->
 <UserConfig>
-  <Group id="BBA_Bow" displayName="Mods.Cheats.Bow_Settings">
-    <PresetsArray>
-      <Preset id="0" displayName="Standard">
-        <Entry varId="BBA_Enabled" value="true" />
-        <Entry varId="BBA_FireRate" value="1" />
-        <Entry varId="BBA_Shots" value="0" />
-        <Entry varId="BBA_ReloadRate" value="1" />
-      </Preset>
-    </PresetsArray>
-    <VisibleVars>
-      <Var id="BBA_Enabled" displayName="Mod_aktiv" displayType="TOGGLE" />
-      <Var id="BBA_FireRate" displayName="Schussgeschwindigkeit_x" displayType="SLIDER;1;10;90" />
-      <Var id="BBA_Shots" displayName="Schuesse_vor_Nachladen" displayType="OPTIONS">
-        <OptionsArray>
-          <Option id="0" displayName="1_Standard" />
-          <Option id="1" displayName="2" />
-          <Option id="2" displayName="3" />
-          <Option id="3" displayName="5" />
-          <Option id="4" displayName="10" />
-          <Option id="5" displayName="25" />
-          <Option id="6" displayName="Automatik_ohne_Nachladen" />
-        </OptionsArray>
-      </Var>
-      <Var id="BBA_ReloadRate" displayName="Nachlade_Tempo_x" displayType="SLIDER;1;10;90" />
-    </VisibleVars>
-  </Group>
-  <Group id="BBA_Bolt" displayName="Mods.Cheats.Bolt_Settings">
-    <PresetsArray>
-      <Preset id="0" displayName="Standard">
-        <Entry varId="BBA_BoltSpeed" value="1" />
-        <Entry varId="BBA_BoltDamage" value="0" />
-      </Preset>
-    </PresetsArray>
-    <VisibleVars>
-      <Var id="BBA_BoltSpeed" displayName="Bolzen_Geschwindigkeit_x" displayType="SLIDER;1;1000;999" />
-      <Var id="BBA_BoltDamage" displayName="Bolzen_Schaden_x" displayType="OPTIONS">
-        <OptionsArray>
-          <Option id="0" displayName="1x" />
-          <Option id="1" displayName="2x" />
-          <Option id="2" displayName="5x" />
-          <Option id="3" displayName="10x" />
-          <Option id="4" displayName="25x" />
-          <Option id="5" displayName="50x" />
-          <Option id="6" displayName="100x" />
-          <Option id="7" displayName="500x" />
-          <Option id="8" displayName="1000x" />
-          <Option id="9" displayName="5000x" />
-          <Option id="10" displayName="10000x" />
-          <Option id="11" displayName="50000x" />
-          <Option id="12" displayName="100000x" />
-        </OptionsArray>
-      </Var>
-    </VisibleVars>
-  </Group>
+	<Group id="BBA_Bow" displayName="Mods.Cheats.Bow Settings" tags="customDisplayName">
+		<VisibleVars>
+			<Var id="BBA_Enabled" displayName="Mod enabled" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="BBA_FireRate" displayName="Fire speed (x)" displayType="SLIDER;1;10;90" tags="nonLocalizedName"/>
+			<Var id="BBA_Shots" displayName="Shots before reload" displayType="OPTIONS" tags="nonLocalizedName">
+				<OptionsArray>
+					<Option id="0" displayName="1 (default)"/>
+					<Option id="1" displayName="2"/>
+					<Option id="2" displayName="3"/>
+					<Option id="3" displayName="5"/>
+					<Option id="4" displayName="10"/>
+					<Option id="5" displayName="25"/>
+					<Option id="6" displayName="Automatic (no reload)"/>
+				</OptionsArray>
+			</Var>
+			<Var id="BBA_ReloadRate" displayName="Reload speed (x)" displayType="SLIDER;1;10;90" tags="nonLocalizedName"/>
+		</VisibleVars>
+	</Group>
+	<Group id="BBA_Bolt" displayName="Mods.Cheats.Bolt Settings" tags="customDisplayName">
+		<VisibleVars>
+			<Var id="BBA_BoltSpeed" displayName="Bolt speed (x)" displayType="SLIDER;1;1000;999" tags="nonLocalizedName"/>
+			<Var id="BBA_BoltDamage" displayName="Bolt damage (x)" displayType="OPTIONS" tags="nonLocalizedName">
+				<OptionsArray>
+					<Option id="0" displayName="1x"/>
+					<Option id="1" displayName="2x"/>
+					<Option id="2" displayName="5x"/>
+					<Option id="3" displayName="10x"/>
+					<Option id="4" displayName="25x"/>
+					<Option id="5" displayName="50x"/>
+					<Option id="6" displayName="100x"/>
+					<Option id="7" displayName="500x"/>
+					<Option id="8" displayName="1000x"/>
+					<Option id="9" displayName="5000x"/>
+					<Option id="10" displayName="10000x"/>
+					<Option id="11" displayName="50000x"/>
+					<Option id="12" displayName="100000x"/>
+				</OptionsArray>
+			</Var>
+		</VisibleVars>
+	</Group>
 </UserConfig>
