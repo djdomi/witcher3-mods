@@ -102,6 +102,8 @@ function SetBehaviorGraphVariables(varName : name, flag : bool, optional num : i
 	if (isPlayer && flag && BBA_On() && (varName == 'isAimingWeapon' || varName == 'isShootingWeapon'))
 	{
 		BBA_ApplyUnlimited();
+		if (varName == 'isAimingWeapon')
+			BBA_EquipDefaultBolt();
 		BBA_SpeedUp(BBA_FireRate());
 	}
 }
@@ -151,6 +153,8 @@ var bbaSpeedDone : bool;
 @wrapMethod(W3BoltProjectile)
 function ThrowProjectile(targetPosIn : Vector)
 {
+	if (GetOwner() == thePlayer)
+		BBA_ApplyUnlimited();
 	if (!bbaSpeedDone && GetOwner() == thePlayer && BBA_On())
 	{
 		projSpeed = projSpeed * BBA_BoltSpeed();
@@ -309,33 +313,57 @@ function BBA_DefaultBoltName() : name
 @addField(W3PlayerWitcher)
 var bbaBoltBusy : bool;
 
-// Statt auf Standardbolzen zurueckzufallen: gewaehlten Bolzen anlegen
-@wrapMethod(W3PlayerWitcher)
-function AddAndEquipInfiniteBolt(optional forceBodkin : bool, optional forceHarpoon : bool)
+// Gewaehlten Standard-Bolzen anlegen (nur mit Armbrust, nicht unter Wasser)
+function BBA_EquipDefaultBolt()
 {
+	var p : W3PlayerWitcher;
 	var boltName : name;
 	var ids : array<SItemUniqueId>;
 	var cur : SItemUniqueId;
+	var weapon : SItemUniqueId;
 
-	wrappedMethod(forceBodkin, forceHarpoon);
-
-	if (bbaBoltBusy || forceHarpoon || ShouldUseInfiniteWaterBolts())
+	p = GetWitcherPlayer();
+	if (!p || p.bbaBoltBusy)
 		return;
 	boltName = BBA_DefaultBoltName();
 	if (boltName == '')
 		return;
-	if (GetItemEquippedOnSlot(EES_Bolt, cur) && inv.GetItemName(cur) == boltName)
+	if (!p.GetItemEquippedOnSlot(EES_RangedWeapon, weapon) || !p.inv.IsItemCrossbow(weapon))
+		return;
+	if (p.ShouldUseInfiniteWaterBolts())
+		return;
+	if (p.GetItemEquippedOnSlot(EES_Bolt, cur) && p.inv.GetItemName(cur) == boltName)
 		return;
 
-	ids = inv.GetItemsByName(boltName);
+	ids = p.inv.GetItemsByName(boltName);
 	if (ids.Size() == 0 && BBA_Unlimited())
-		ids = inv.AddAnItem(boltName, 1, true, true);
+		ids = p.inv.AddAnItem(boltName, 1, true, true);
 	if (ids.Size() == 0)
 		return;
 
-	bbaBoltBusy = true;
-	EquipItem(ids[0], EES_Bolt);
-	bbaBoltBusy = false;
+	p.bbaBoltBusy = true;
+	p.EquipItem(ids[0], EES_Bolt);
+	p.bbaBoltBusy = false;
+}
+
+// Spiel wechselt auf Standardbolzen, wenn Bolzen leer sind -> gewaehlten wieder anlegen
+@wrapMethod(W3PlayerWitcher)
+function UnequipItemFromSlot(slot : EEquipmentSlots, optional reequipped : bool) : bool
+{
+	var r : bool;
+	r = wrappedMethod(slot, reequipped);
+	if (slot == EES_Bolt && !reequipped)
+		BBA_EquipDefaultBolt();
+	return r;
+}
+
+// Nach Dialogen/Zwischensequenzen wechselt das Spiel auf Standardbolzen
+@wrapMethod(CR4Game)
+function SetIsDialogOrCutscenePlaying(b : bool)
+{
+	wrappedMethod(b);
+	if (!b)
+		BBA_EquipDefaultBolt();
 }
 
 // Aenderung im Menue sofort anwenden
@@ -345,6 +373,6 @@ function OnConfigValueChanged(varName : name, value : string)
 	wrappedMethod(varName, value);
 	if (varName == 'BBA_Unlimited' || varName == 'BBA_Enabled')
 		BBA_ApplyUnlimited();
-	if ((varName == 'BBA_DefaultBolt' || varName == 'BBA_Enabled') && GetWitcherPlayer())
-		GetWitcherPlayer().AddAndEquipInfiniteBolt();
+	if (varName == 'BBA_DefaultBolt' || varName == 'BBA_Enabled')
+		BBA_EquipDefaultBolt();
 }
