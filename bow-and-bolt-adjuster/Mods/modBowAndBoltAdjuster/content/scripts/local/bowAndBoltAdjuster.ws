@@ -269,7 +269,7 @@ function PopulateMenuData() : CScriptedFlashArray
 	}
 
 	// noch keins da: anlegen
-	modMenu = CreateMenuItem( "djdomi_modmenu", "Mod Menu", NameToFlashUInt( 'ModMenu' ), IGMActionType_MenuHolder, false, "Mod Menu" );
+	modMenu = CreateMenuItem( "djdomi_modmenu", "Mod Menu", NameToFlashUInt( 'DjdomiModMenu' ), IGMActionType_MenuHolder, false, "Mod Menu" );
 	modMenu.SetMemberFlashString( "label", "Mod Menu" );
 	modMenu.SetMemberFlashString( "listTitle", "Mod Menu" );
 	modList = m_flashValueStorage.CreateTempFlashArray();
