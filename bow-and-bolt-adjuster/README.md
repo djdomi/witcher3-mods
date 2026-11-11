@@ -13,7 +13,7 @@ Adjusts the crossbow and bolts from the in-game pause menu.
 
 ### Features
 
-In game: open the **pause menu → Bow and Bolt**.
+In game: open the **pause menu → Mod Menu → Bow and Bolt**.
 
 **Crossbow**
 - Mod on/off
@@ -58,7 +58,7 @@ Stellt die Armbrust und die Bolzen im Pausemenü ein.
 
 ### Was die Mod kann
 
-Im Spiel: **Pausemenü → Bow and Bolt** öffnen.
+Im Spiel: **Pausemenü → Mod Menu → Bow and Bolt** öffnen.
 
 **Armbrust**
 - Mod an/aus

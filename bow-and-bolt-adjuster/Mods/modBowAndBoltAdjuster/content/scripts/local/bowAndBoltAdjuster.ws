@@ -1,6 +1,6 @@
 // Bow-and-Bolt Adjuster - The Witcher 3 Remastered (5.0+)
 // https://github.com/djdomi/witcher3-mods - License: AGPL-3.0 (SPDX: AGPL-3.0-only)
-// Armbrust- und Bolzen-Einstellungen im Pausemenue: "Bow and Bolt"
+// Armbrust- und Bolzen-Einstellungen: Pausemenue > Mod Menu > Bow and Bolt
 
 // ---------- Einstellungen lesen ----------
 function BBA_Get(grp : name, v : name, dflt : float) : float
@@ -230,12 +230,17 @@ function BBA_BuildMenuOptions( storage : CScriptedFlashValueStorage ) : CScripte
 	return root.GetMemberFlashArray( "subElements" );
 }
 
+// Gemeinsames "Mod Menu" im Pausemenue (alle Mods von djdomi/witcher3-mods):
+// Pausemenue > Mod Menu > Bow and Bolt > Einstellungen.
+// Jede Mod sucht den Eintrag "mod_menu"; gibt es ihn noch nicht, legt sie ihn an.
 @wrapMethod(IngameMenuStructureCreator)
 function PopulateMenuData() : CScriptedFlashArray
 {
 	var src : CScriptedFlashArray;
 	var dst : CScriptedFlashArray;
 	var menuItem : CScriptedFlashObject;
+	var modMenu : CScriptedFlashObject;
+	var modList : CScriptedFlashArray;
 	var bbaItem : CScriptedFlashObject;
 	var i : int;
 	var after : string;
@@ -249,6 +254,27 @@ function PopulateMenuData() : CScriptedFlashArray
 	bbaItem.SetMemberFlashString( "label", "Bow and Bolt" );
 	bbaItem.SetMemberFlashString( "listTitle", "Bow and Bolt" );
 	bbaItem.SetMemberFlashArray( "subElements", BBA_BuildMenuOptions( m_flashValueStorage ) );
+
+	// vorhandenes "Mod Menu" suchen (von einer anderen unserer Mods angelegt)
+	for ( i = 0; i < src.GetLength(); i += 1 )
+	{
+		menuItem = src.GetElementFlashObject( i );
+		if ( menuItem && menuItem.GetMemberFlashString( "id" ) == "mod_menu" )
+		{
+			modList = menuItem.GetMemberFlashArray( "subElements" );
+			modList.PushBackFlashObject( bbaItem );
+			menuItem.SetMemberFlashArray( "subElements", modList );
+			return src;
+		}
+	}
+
+	// noch keins da: anlegen
+	modMenu = CreateMenuItem( "mod_menu", "Mod Menu", NameToFlashUInt( 'ModMenu' ), IGMActionType_MenuHolder, false, "Mod Menu" );
+	modMenu.SetMemberFlashString( "label", "Mod Menu" );
+	modMenu.SetMemberFlashString( "listTitle", "Mod Menu" );
+	modList = m_flashValueStorage.CreateTempFlashArray();
+	modList.PushBackFlashObject( bbaItem );
+	modMenu.SetMemberFlashArray( "subElements", modList );
 
 	// nach "Cheats" einfuegen, sonst nach "Einstellungen"
 	after = "mainmenu_options";
@@ -267,12 +293,12 @@ function PopulateMenuData() : CScriptedFlashArray
 		dst.PushBackFlashObject( menuItem );
 		if ( !placed && menuItem && menuItem.GetMemberFlashString( "id" ) == after )
 		{
-			dst.PushBackFlashObject( bbaItem );
+			dst.PushBackFlashObject( modMenu );
 			placed = true;
 		}
 	}
 	if ( !placed )
-		dst.PushBackFlashObject( bbaItem );
+		dst.PushBackFlashObject( modMenu );
 
 	return dst;
 }
