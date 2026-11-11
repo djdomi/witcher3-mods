@@ -7,7 +7,7 @@
 			<Var id="GA_Sep1" displayName="" displayType="SUBTLE_SEPARATOR"/>
 			<Var id="GA_MinDmg" displayName="Min damage per hit (0 = default, never above max)" displayType="SLIDER;0;10000;100" tags="nonLocalizedName"/>
 			<Var id="GA_MaxDmg" displayName="Max damage per hit (0 = default)" displayType="SLIDER;0;20000;200" tags="nonLocalizedName"/>
-			<Var id="GA_DamageMult" displayName="Damage multiplier (x)" displayType="SLIDER;1;100;99" tags="nonLocalizedName"/>
+			<Var id="GA_DamageMult" displayName="Damage multiplier (x, 1 = standard)" displayType="SLIDER;1;100;99" tags="nonLocalizedName"/>
 			<Var id="GA_Sep2" displayName="" displayType="SUBTLE_SEPARATOR"/>
 			<Var id="GA_FullCharge" displayName="Always fully charged" displayType="TOGGLE" tags="nonLocalizedName"/>
 			<Var id="GA_AlwaysCrit" displayName="Every hit is critical" displayType="TOGGLE" tags="nonLocalizedName"/>
@@ -27,6 +27,33 @@
 			<Var id="GA_Poison" displayName="Hits poison" displayType="TOGGLE" tags="nonLocalizedName"/>
 			<Var id="GA_Freeze" displayName="Hits freeze" displayType="TOGGLE" tags="nonLocalizedName"/>
 			<Var id="GA_Knockdown" displayName="Hits knock down" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="GA_Stagger" displayName="Hits stagger" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="GA_Confusion" displayName="Hits confuse" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="GA_Blind" displayName="Hits blind" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="GA_Slow" displayName="Hits slow down" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="GA_Paralyze" displayName="Hits paralyze" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="GA_Sep4" displayName="" displayType="SUBTLE_SEPARATOR"/>
+			<Var id="GA_KillChance" displayName="Instant kill chance" displayType="OPTIONS" tags="nonLocalizedName;nonLocalized;customNames">
+				<OptionsArray>
+					<Option id="0" displayName="Off"/>
+					<Option id="1" displayName="5%"/>
+					<Option id="2" displayName="10%"/>
+					<Option id="3" displayName="25%"/>
+					<Option id="4" displayName="50%"/>
+					<Option id="5" displayName="100%"/>
+				</OptionsArray>
+			</Var>
+			<Var id="GA_Area" displayName="Damage to nearby enemies" displayType="OPTIONS" tags="nonLocalizedName;nonLocalized;customNames">
+				<OptionsArray>
+					<Option id="0" displayName="Off"/>
+					<Option id="1" displayName="25%"/>
+					<Option id="2" displayName="50%"/>
+					<Option id="3" displayName="100%"/>
+				</OptionsArray>
+			</Var>
+			<Var id="GA_MonsterMult" displayName="Extra damage vs monsters (x, 1 = standard)" displayType="SLIDER;1;100;99" tags="nonLocalizedName"/>
+			<Var id="GA_Adrenaline" displayName="Adrenaline per hit" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="GA_Stamina" displayName="Full stamina per hit" displayType="TOGGLE" tags="nonLocalizedName"/>
 		</VisibleVars>
 	</Group>
 </UserConfig>

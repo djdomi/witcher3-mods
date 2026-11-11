@@ -9,12 +9,16 @@ Cheat mod for **The Witcher 3 Remastered (version 5.0 or newer)**. Makes the sil
 All bonuses only work for melee hits while Geralt holds Aerondight.
 
 - **Min and max damage per hit:** min from default up to 10000, max from default up to 20000. Every hit deals a random value between them. The min is never higher than the max (it is lowered automatically).
-- **Damage multiplier:** x1 to x100, on top of everything.
+- **Damage multiplier:** x1 (standard) to x100, on top of everything.
 - **Always fully charged:** Aerondight charges stay full and are never lost.
 - **Every hit is critical.**
 - **Ignore armor and resistances.**
 - **Life steal:** off, 10%, 25%, 50% or 100% of the damage heals Geralt.
-- **Hit effects:** bleeding, fire, poison (on by default), freeze, knockdown (off by default).
+- **Hit effects:** bleeding, fire, poison (on by default), freeze, knockdown, stagger, confusion, blindness, slow down, paralysis (off by default).
+- **Instant kill chance:** off, 5%, 10%, 25%, 50% or 100%.
+- **Damage to nearby enemies:** off, 25%, 50% or 100% of the hit damage to hostile enemies within 4 m.
+- **Extra damage vs monsters:** x1 (standard) to x100.
+- **Adrenaline per hit** and **full stamina per hit** (off by default).
 
 ## Settings
 
@@ -53,12 +57,16 @@ Cheat-Mod für **The Witcher 3 Remastered (Version 5.0 oder neuer)**. Macht das 
 Alle Boni wirken nur bei Nahkampf-Treffern, wenn Geralt Aerondight in der Hand hat.
 
 - **Mindest- und Höchstschaden pro Treffer:** Minimum von Standard bis 10000, Maximum von Standard bis 20000. Jeder Treffer macht einen Zufallswert dazwischen. Das Minimum ist nie höher als das Maximum (wird automatisch gesenkt).
-- **Schadens-Faktor:** x1 bis x100, zusätzlich zu allem.
+- **Schadens-Faktor:** x1 (Standard) bis x100, zusätzlich zu allem.
 - **Immer voll aufgeladen:** die Ladungen von Aerondight bleiben voll und gehen nie verloren.
 - **Jeder Treffer ist kritisch.**
 - **Rüstung und Resistenzen ignorieren.**
 - **Lebensraub:** aus, 10 %, 25 %, 50 % oder 100 % des Schadens heilen Geralt.
-- **Treffer-Effekte:** Blutung, Feuer, Gift (standardmäßig an), Einfrieren, Umwerfen (standardmäßig aus).
+- **Treffer-Effekte:** Blutung, Feuer, Gift (standardmäßig an), Einfrieren, Umwerfen, Taumeln, Verwirrung, Blendung, Verlangsamung, Lähmung (standardmäßig aus).
+- **Sofort-Tod-Chance:** aus, 5 %, 10 %, 25 %, 50 % oder 100 %.
+- **Schaden an Gegnern in der Nähe:** aus, 25 %, 50 % oder 100 % des Treffer-Schadens an feindliche Gegner im Umkreis von 4 m.
+- **Extra-Schaden gegen Monster:** x1 (Standard) bis x100.
+- **Adrenalin pro Treffer** und **volle Ausdauer pro Treffer** (standardmäßig aus).
 
 ## Einstellungen
 

@@ -51,6 +51,56 @@ function GA_LifeSteal() : float
 	return 0;
 }
 
+function GA_KillChance() : float
+{
+	switch ((int)GA_Num('GA_KillChance', 0))
+	{
+		case 1: return 0.05;
+		case 2: return 0.1;
+		case 3: return 0.25;
+		case 4: return 0.5;
+		case 5: return 1.0;
+	}
+	return 0;
+}
+
+function GA_MonsterMult() : float { return ClampF(GA_Num('GA_MonsterMult', 1), 1, 100); }
+
+// Flaechenschaden: Anteil vom Treffer-Schaden fuer Gegner in der Naehe
+function GA_AreaShare() : float
+{
+	switch ((int)GA_Num('GA_Area', 0))
+	{
+		case 1: return 0.25;
+		case 2: return 0.5;
+		case 3: return 1.0;
+	}
+	return 0;
+}
+
+// Schaden an alle feindlichen Gegner im Umkreis von 4 m (kein Nahkampf -> keine Kettenreaktion)
+function GA_AreaDamage(victim : CGameplayEntity, dmg : float)
+{
+	var ents : array<CGameplayEntity>;
+	var a : CActor;
+	var dm : W3DamageAction;
+	var i : int;
+
+	if (!victim || dmg <= 0) return;
+	FindGameplayEntitiesInSphere(ents, victim.GetWorldPosition(), 4, 20, , FLAG_OnlyAliveActors);
+	for (i = 0; i < ents.Size(); i += 1)
+	{
+		a = (CActor)ents[i];
+		if (!a || a == thePlayer || a == victim || !a.IsAlive()) continue;
+		if (!IsRequiredAttitudeBetween(thePlayer, a, true)) continue;
+		dm = new W3DamageAction in theGame.damageMgr;
+		dm.Initialize(thePlayer, a, NULL, "GodlikeAerondight", EHRT_Light, CPS_Undefined, false, false, false, true);
+		dm.AddDamage(theGame.params.DAMAGE_NAME_DIRECT, dmg);
+		theGame.damageMgr.ProcessAction(dm);
+		delete dm;
+	}
+}
+
 // Haelt Geralt gerade Aerondight in der Hand?
 function GA_HoldsAerondight() : bool
 {
@@ -81,6 +131,11 @@ function ProcessAction(act : W3DamageAction)
 		if (GA_Is('GA_Poison', true))    act.AddEffectInfo(EET_Poison);
 		if (GA_Is('GA_Freeze', false))   act.AddEffectInfo(EET_Frozen);
 		if (GA_Is('GA_Knockdown', false)) act.AddEffectInfo(EET_Knockdown);
+		if (GA_Is('GA_Stagger', false))   act.AddEffectInfo(EET_Stagger);
+		if (GA_Is('GA_Confusion', false)) act.AddEffectInfo(EET_Confusion);
+		if (GA_Is('GA_Blind', false))     act.AddEffectInfo(EET_Blindness);
+		if (GA_Is('GA_Slow', false))      act.AddEffectInfo(EET_Slowdown);
+		if (GA_Is('GA_Paralyze', false))  act.AddEffectInfo(EET_Paralyzed);
 	}
 	wrappedMethod(act);
 }
@@ -116,12 +171,25 @@ function ProcessActionDamage_DealDamage()
 			if (action.processedDmg.essenceDamage > 0)  action.processedDmg.essenceDamage = n;
 		}
 		action.MultiplyAllDamageBy(GA_Mult());
+		if (victimMonsterCategory != MC_Human)
+			action.MultiplyAllDamageBy(GA_MonsterMult());
+		if (actorVictim && actorVictim != thePlayer && RandF() < GA_KillChance())
+		{
+			if (action.processedDmg.vitalityDamage > 0) action.processedDmg.vitalityDamage = actorVictim.GetStatMax(BCS_Vitality) * 10;
+			if (action.processedDmg.essenceDamage > 0)  action.processedDmg.essenceDamage = actorVictim.GetStatMax(BCS_Essence) * 10;
+		}
 		d = MaxF(action.processedDmg.vitalityDamage, action.processedDmg.essenceDamage);
 		steal = GA_LifeSteal();
 		if (steal > 0)
 			thePlayer.GainStat(BCS_Vitality, d * steal);
+		if (GA_Is('GA_Adrenaline', false))
+			thePlayer.GainStat(BCS_Focus, 1);
+		if (GA_Is('GA_Stamina', false))
+			thePlayer.GainStat(BCS_Stamina, thePlayer.GetStatMax(BCS_Stamina));
 	}
 	wrappedMethod();
+	if (d > 0 && GA_AreaShare() > 0)
+		GA_AreaDamage(action.victim, d * GA_AreaShare());
 }
 
 // ---------- Immer voll aufgeladen ----------
@@ -175,6 +243,16 @@ function GA_BuildMenuOptions( storage : CScriptedFlashValueStorage ) : CScripted
 	if ( wrapper.GetVarValue( 'GA_Main', 'GA_Poison' ) == "" ) wrapper.SetVarValue( 'GA_Main', 'GA_Poison', "true" );
 	if ( wrapper.GetVarValue( 'GA_Main', 'GA_Freeze' ) == "" ) wrapper.SetVarValue( 'GA_Main', 'GA_Freeze', "false" );
 	if ( wrapper.GetVarValue( 'GA_Main', 'GA_Knockdown' ) == "" ) wrapper.SetVarValue( 'GA_Main', 'GA_Knockdown', "false" );
+	if ( wrapper.GetVarValue( 'GA_Main', 'GA_Stagger' ) == "" ) wrapper.SetVarValue( 'GA_Main', 'GA_Stagger', "false" );
+	if ( wrapper.GetVarValue( 'GA_Main', 'GA_Confusion' ) == "" ) wrapper.SetVarValue( 'GA_Main', 'GA_Confusion', "false" );
+	if ( wrapper.GetVarValue( 'GA_Main', 'GA_Blind' ) == "" ) wrapper.SetVarValue( 'GA_Main', 'GA_Blind', "false" );
+	if ( wrapper.GetVarValue( 'GA_Main', 'GA_Slow' ) == "" ) wrapper.SetVarValue( 'GA_Main', 'GA_Slow', "false" );
+	if ( wrapper.GetVarValue( 'GA_Main', 'GA_Paralyze' ) == "" ) wrapper.SetVarValue( 'GA_Main', 'GA_Paralyze', "false" );
+	if ( wrapper.GetVarValue( 'GA_Main', 'GA_KillChance' ) == "" ) wrapper.SetVarValue( 'GA_Main', 'GA_KillChance', "0" );
+	if ( wrapper.GetVarValue( 'GA_Main', 'GA_Area' ) == "" ) wrapper.SetVarValue( 'GA_Main', 'GA_Area', "0" );
+	if ( wrapper.GetVarValue( 'GA_Main', 'GA_MonsterMult' ) == "" ) wrapper.SetVarValue( 'GA_Main', 'GA_MonsterMult', "1" );
+	if ( wrapper.GetVarValue( 'GA_Main', 'GA_Adrenaline' ) == "" ) wrapper.SetVarValue( 'GA_Main', 'GA_Adrenaline', "false" );
+	if ( wrapper.GetVarValue( 'GA_Main', 'GA_Stamina' ) == "" ) wrapper.SetVarValue( 'GA_Main', 'GA_Stamina', "false" );
 	// Mindestschaden nie hoeher als Hoechstschaden
 	if ( GA_MaxDmg() > 0 && GA_Num( 'GA_MinDmg', 0 ) > GA_MaxDmg() ) wrapper.SetVarValue( 'GA_Main', 'GA_MinDmg', FloatToString( GA_MaxDmg() ) );
 
