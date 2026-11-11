@@ -33,12 +33,13 @@ function ToxicityLowEnoughToDrinkPotion(slotid : EEquipmentSlots, optional itemI
 
 // Gift pro Trank: 0 oder 1, und immer trinkbar
 @wrapMethod(W3PlayerWitcher)
-function HasFreeToxicityToDrinkPotion(item : SItemUniqueId, effectType : EEffectType, out finalPotionToxicity : float) : bool
+// 5.0: zusaetzliche Parameter toxicityOffset und adrenaline
+function HasFreeToxicityToDrinkPotion(item : SItemUniqueId, effectType : EEffectType, out finalPotionToxicity : float, out toxicityOffset : float, out adrenaline : float) : bool
 {
 	var ret : bool;
 	var m : int;
 
-	ret = wrappedMethod(item, effectType, finalPotionToxicity);
+	ret = wrappedMethod(item, effectType, finalPotionToxicity, toxicityOffset, adrenaline);
 	m = UP_ToxMode();
 	if (m == 2)
 		return ret;
@@ -46,6 +47,7 @@ function HasFreeToxicityToDrinkPotion(item : SItemUniqueId, effectType : EEffect
 		finalPotionToxicity = 1;
 	else
 		finalPotionToxicity = 0;
+	toxicityOffset = 0; // Absude sperren kein Gift
 	return true;
 }
 
