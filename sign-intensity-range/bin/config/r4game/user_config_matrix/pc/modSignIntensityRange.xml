@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- https://github.com/djdomi/witcher3-mods - License: AGPL-3.0 -->
 <UserConfig>
-	<Group id="SIR_Signs" displayName="Signs" tags="customDisplayName">
+	<Group id="SIR_Signs" displayName="Sign Intensity and Range" tags="customDisplayName">
 		<VisibleVars>
 			<Var id="SIR_Enabled" displayName="Mod enabled" displayType="TOGGLE" tags="nonLocalizedName"/>
 			<Var id="SIR_Separator" displayName="" displayType="SUBTLE_SEPARATOR"/>

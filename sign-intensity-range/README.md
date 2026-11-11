@@ -11,7 +11,7 @@ Makes Geralt's signs stronger and reach further, set from the in-game pause menu
 
 ### Features
 
-In game: open the **pause menu → Signs**.
+In game: open the **pause menu → Mod Menu → Sign Intensity and Range**.
 
 - Mod on/off
 - Sign intensity: slider 100% to 1000% (all five signs: Aard, Igni, Yrden, Quen, Axii)
@@ -48,7 +48,7 @@ Macht Geralts Zeichen stärker und lässt sie weiter reichen, einstellbar im Pau
 
 ### Was die Mod kann
 
-Im Spiel: **Pausemenü → Signs** öffnen.
+Im Spiel: **Pausemenü → Mod Menu → Sign Intensity and Range** öffnen.
 
 - Mod an/aus
 - Zeichenintensität: Schieber 100 % bis 1000 % (alle fünf Zeichen: Aard, Igni, Yrden, Quen, Axii)
