@@ -165,6 +165,28 @@ function ProcessActionDamage_DealDamage()
 	wrappedMethod();
 }
 
+// Standardwerte setzen, wenn noch leer oder 0 (Spiel-Standard = 1x)
+function BBA_Default1( wrapper : CInGameConfigWrapper, v : name, val : string )
+{
+	var s : string;
+	s = wrapper.GetVarValue( 'BBA_Bow', v );
+	if ( s == "" || StringToFloat( s, 0 ) < 1 )
+		wrapper.SetVarValue( 'BBA_Bow', v, val );
+}
+
+function BBA_SetDefaults( wrapper : CInGameConfigWrapper )
+{
+	if ( wrapper.GetVarValue( 'BBA_Bow', 'BBA_Enabled' ) == "" )
+		wrapper.SetVarValue( 'BBA_Bow', 'BBA_Enabled', "true" );
+	BBA_Default1( wrapper, 'BBA_FireRate', "1" );
+	BBA_Default1( wrapper, 'BBA_ReloadRate', "1" );
+	BBA_Default1( wrapper, 'BBA_BoltSpeed', "1" );
+	if ( wrapper.GetVarValue( 'BBA_Bow', 'BBA_Shots' ) == "" )
+		wrapper.SetVarValue( 'BBA_Bow', 'BBA_Shots', "0" );
+	if ( wrapper.GetVarValue( 'BBA_Bow', 'BBA_BoltDamage' ) == "" )
+		wrapper.SetVarValue( 'BBA_Bow', 'BBA_BoltDamage', "0" );
+}
+
 // ---- Pausemenue-Eintrag "Bow and Bolt" (wie Witcher3Cheats: eigener Punkt mit festem Namen) ----
 function BBA_BuildMenuOptions( storage : CScriptedFlashValueStorage ) : CScriptedFlashArray
 {
@@ -187,6 +209,8 @@ function BBA_BuildMenuOptions( storage : CScriptedFlashValueStorage ) : CScripte
 	}
 	if ( groupId < 0 )
 		return options;
+
+	BBA_SetDefaults( wrapper );
 
 	root = storage.CreateTempFlashObject();
 	root.SetMemberFlashArray( "subElements", options );
