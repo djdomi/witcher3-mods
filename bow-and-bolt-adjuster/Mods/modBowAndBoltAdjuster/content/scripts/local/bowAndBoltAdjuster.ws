@@ -3,13 +3,13 @@
 // Armbrust- und Bolzen-Einstellungen im Menue: Optionen > Mods > Cheats
 
 // ---------- Einstellungen lesen ----------
-function BBA_Get(grp : name, v : name, def : float) : float
+function BBA_Get(grp : name, v : name, dflt : float) : float
 {
 	var s : string;
 	s = theGame.GetInGameConfigWrapper().GetVarValue(grp, v);
-	if (s == "" || s == "false") return def;
+	if (s == "" || s == "false") return dflt;
 	if (s == "true") return 1.0;
-	return StringToFloat(s, def);
+	return StringToFloat(s, dflt);
 }
 
 function BBA_On() : bool
