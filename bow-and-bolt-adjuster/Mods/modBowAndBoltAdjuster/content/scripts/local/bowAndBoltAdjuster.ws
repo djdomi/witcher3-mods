@@ -152,7 +152,10 @@ var bbaSpeedDone : bool;
 function ThrowProjectile(targetPosIn : Vector)
 {
 	if (GetOwner() == thePlayer)
+	{
 		BBA_ApplyUnlimited();
+		BBA_TopUpEquippedBolt();
+	}
 	if (!bbaSpeedDone && GetOwner() == thePlayer && BBA_On())
 	{
 		projSpeed = projSpeed * BBA_BoltSpeed();
@@ -297,6 +300,25 @@ function BBA_ApplyUnlimited()
 		FactsRemove("debug_fact_inf_bolts");
 		FactsRemove("bba_inf_bolts_added");
 	}
+}
+
+// Mit 'unlimited': ausgeruesteten Spezial-Bolzen auf mindestens 10 Stueck auffuellen
+function BBA_TopUpEquippedBolt()
+{
+	var p : W3PlayerWitcher;
+	var cur : SItemUniqueId;
+	var n : name;
+	var have : int;
+
+	p = GetWitcherPlayer();
+	if (!p || !BBA_Unlimited() || !p.GetItemEquippedOnSlot(EES_Bolt, cur))
+		return;
+	n = p.inv.GetItemName(cur);
+	if (n == 'Bodkin Bolt' || n == 'Harpoon Bolt')
+		return;
+	have = p.inv.GetItemQuantityByName(n);
+	if (have < 10)
+		p.inv.AddAnItem(n, 10 - have, true, true);
 }
 
 function BBA_DefaultBoltName() : name
