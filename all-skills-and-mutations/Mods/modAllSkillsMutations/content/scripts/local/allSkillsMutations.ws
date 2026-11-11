@@ -1,7 +1,7 @@
-// All Skills & Mutations - Witcher 3 Next-Gen (4.0+)
+// All Skills & Mutations - The Witcher 3 Remastered (5.0+)
 // https://github.com/djdomi/witcher3-mods - License: AGPL-3.0 (SPDX: AGPL-3.0-only)
 // Alle gelernten Faehigkeiten und alle erforschten Mutationen gleichzeitig aktiv.
-// Schalter: Optionen > Mods > Cheats > All_Skills_Mutations
+// Schalter im Pausemenue: "All Skills and Mutations"
 
 // Leer (noch nie eingestellt) = AN
 function ASM_Opt(v : name) : bool
@@ -168,4 +168,87 @@ timer function ASM_Tick(dt : float, id : int)
 				theSound.SoundLoadBank(bank, true);
 		}
 	}
+}
+
+// ================= Pausemenue-Eintrag "All Skills and Mutations" =================
+function ASM_SetDefaults( wrapper : CInGameConfigWrapper )
+{
+	if ( wrapper.GetVarValue( 'ASM_Main', 'ASM_Skills' ) == "" )
+		wrapper.SetVarValue( 'ASM_Main', 'ASM_Skills', "true" );
+	if ( wrapper.GetVarValue( 'ASM_Main', 'ASM_Mutations' ) == "" )
+		wrapper.SetVarValue( 'ASM_Main', 'ASM_Mutations', "true" );
+}
+
+function ASM_BuildMenuOptions( storage : CScriptedFlashValueStorage ) : CScriptedFlashArray
+{
+	var wrapper : CInGameConfigWrapper;
+	var groupId, i : int;
+	var root : CScriptedFlashObject;
+	var options : CScriptedFlashArray;
+
+	options = storage.CreateTempFlashArray();
+	wrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
+	if ( !wrapper )
+		return options;
+
+	groupId = -1;
+	for ( i = 0; i < wrapper.GetGroupsNum(); i += 1 )
+	{
+		if ( wrapper.GetGroupName( i ) == 'ASM_Main' )
+			groupId = i;
+	}
+	if ( groupId < 0 )
+		return options;
+
+	ASM_SetDefaults( wrapper );
+
+	root = storage.CreateTempFlashObject();
+	root.SetMemberFlashArray( "subElements", options );
+	IngameMenu_FillSubMenuOptionsList( storage, groupId, 'ASM_Main', root );
+	return root.GetMemberFlashArray( "subElements" );
+}
+
+@wrapMethod(IngameMenuStructureCreator)
+function PopulateMenuData() : CScriptedFlashArray
+{
+	var src, dst : CScriptedFlashArray;
+	var menuItem, asmItem : CScriptedFlashObject;
+	var i : int;
+	var after : string;
+	var placed : bool;
+
+	src = wrappedMethod();
+	if ( !parentMenu || parentMenu.isMainMenu )
+		return src;
+
+	asmItem = CreateMenuItem( "asm_menu", "All Skills and Mutations", NameToFlashUInt( 'ASMMenu' ), IGMActionType_MenuLastHolder, false, "All Skills and Mutations" );
+	asmItem.SetMemberFlashString( "label", "All Skills and Mutations" );
+	asmItem.SetMemberFlashString( "listTitle", "All Skills and Mutations" );
+	asmItem.SetMemberFlashArray( "subElements", ASM_BuildMenuOptions( m_flashValueStorage ) );
+
+	// nach "Cheats" einfuegen, sonst nach "Einstellungen"
+	after = "mainmenu_options";
+	for ( i = 0; i < src.GetLength(); i += 1 )
+	{
+		menuItem = src.GetElementFlashObject( i );
+		if ( menuItem && menuItem.GetMemberFlashString( "id" ) == "wqol_cheats" )
+			after = "wqol_cheats";
+	}
+
+	dst = m_flashValueStorage.CreateTempFlashArray();
+	placed = false;
+	for ( i = 0; i < src.GetLength(); i += 1 )
+	{
+		menuItem = src.GetElementFlashObject( i );
+		dst.PushBackFlashObject( menuItem );
+		if ( !placed && menuItem && menuItem.GetMemberFlashString( "id" ) == after )
+		{
+			dst.PushBackFlashObject( asmItem );
+			placed = true;
+		}
+	}
+	if ( !placed )
+		dst.PushBackFlashObject( asmItem );
+
+	return dst;
 }
