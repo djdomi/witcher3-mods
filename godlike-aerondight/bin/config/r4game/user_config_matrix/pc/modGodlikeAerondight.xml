@@ -4,6 +4,7 @@
 	<Group id="GA_Main" displayName="Godlike Aerondight" tags="customDisplayName">
 		<VisibleVars>
 			<Var id="GA_Enabled" displayName="Mod enabled" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="GA_Give" displayName="Give me Aerondight (switch on, close menu)" displayType="TOGGLE" tags="nonLocalizedName"/>
 			<Var id="GA_Sep1" displayName="" displayType="SUBTLE_SEPARATOR"/>
 			<Var id="GA_MinDmg" displayName="Min damage per hit (0 = default, never above max)" displayType="SLIDER;0;10000;100" tags="nonLocalizedName"/>
 			<Var id="GA_MaxDmg" displayName="Max damage per hit (0 = default)" displayType="SLIDER;0;20000;200" tags="nonLocalizedName"/>

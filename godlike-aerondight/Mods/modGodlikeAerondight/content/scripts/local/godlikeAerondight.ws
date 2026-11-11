@@ -208,6 +208,24 @@ function OnUpdate(deltaTime : float)
 	return wrappedMethod(deltaTime);
 }
 
+// ---------- Schwert erhalten: Schalter an, Menue schliessen -> Aerondight im Inventar ----------
+function GA_GiveSword()
+{
+	var inv : CInventoryComponent;
+	if (!GA_Is('GA_Give', false)) return;
+	theGame.GetInGameConfigWrapper().SetVarValue('GA_Main', 'GA_Give', "false");
+	inv = thePlayer.GetInventory();
+	if (inv && inv.GetItemQuantityByName('Aerondight EP2') < 1)
+		inv.AddAnItem('Aerondight EP2', 1);
+}
+
+@wrapMethod(CR4IngameMenu)
+function OnClosingMenu()
+{
+	GA_GiveSword();
+	return wrappedMethod();
+}
+
 // ---------- Mod Menu (gemeinsamer Standard) ----------
 function GA_BuildMenuOptions( storage : CScriptedFlashValueStorage ) : CScriptedFlashArray
 {
@@ -253,6 +271,7 @@ function GA_BuildMenuOptions( storage : CScriptedFlashValueStorage ) : CScripted
 	if ( wrapper.GetVarValue( 'GA_Main', 'GA_MonsterMult' ) == "" ) wrapper.SetVarValue( 'GA_Main', 'GA_MonsterMult', "1" );
 	if ( wrapper.GetVarValue( 'GA_Main', 'GA_Adrenaline' ) == "" ) wrapper.SetVarValue( 'GA_Main', 'GA_Adrenaline', "false" );
 	if ( wrapper.GetVarValue( 'GA_Main', 'GA_Stamina' ) == "" ) wrapper.SetVarValue( 'GA_Main', 'GA_Stamina', "false" );
+	if ( wrapper.GetVarValue( 'GA_Main', 'GA_Give' ) == "" ) wrapper.SetVarValue( 'GA_Main', 'GA_Give', "false" );
 	// Mindestschaden nie hoeher als Hoechstschaden
 	if ( GA_MaxDmg() > 0 && GA_Num( 'GA_MinDmg', 0 ) > GA_MaxDmg() ) wrapper.SetVarValue( 'GA_Main', 'GA_MinDmg', FloatToString( GA_MaxDmg() ) );
 

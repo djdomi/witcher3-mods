@@ -2,9 +2,11 @@
 
 English · [Deutsch](#deutsch)
 
-Cheat mod for **The Witcher 3 Remastered (version 5.0 or newer)**. Makes the silver sword **Aerondight** (Blood and Wine) godlike. You need to own Aerondight in your game.
+Cheat mod for **The Witcher 3 Remastered (version 5.0 or newer)**. Makes the silver sword **Aerondight** (Blood and Wine) godlike. No need to own Aerondight: the mod can give it to you.
 
 ## Features
+
+- **Get the sword:** switch on "Give me Aerondight" and close the menu. Aerondight is put into your inventory (only if you don't have it yet). No crafting needed.
 
 All bonuses only work for melee hits while Geralt holds Aerondight.
 
@@ -50,9 +52,11 @@ https://github.com/djdomi/witcher3-mods · License: **AGPL-3.0** (see [LICENSE](
 
 # Deutsch
 
-Cheat-Mod für **The Witcher 3 Remastered (Version 5.0 oder neuer)**. Macht das Silberschwert **Aerondight** (Blood and Wine) göttlich. Du musst Aerondight im Spiel besitzen.
+Cheat-Mod für **The Witcher 3 Remastered (Version 5.0 oder neuer)**. Macht das Silberschwert **Aerondight** (Blood and Wine) göttlich. Du musst Aerondight nicht besitzen: die Mod kann es dir geben.
 
 ## Was die Mod kann
+
+- **Schwert erhalten:** "Give me Aerondight" einschalten und das Menü schließen. Aerondight liegt dann im Inventar (nur wenn du es noch nicht hast). Kein Craften nötig.
 
 Alle Boni wirken nur bei Nahkampf-Treffern, wenn Geralt Aerondight in der Hand hat.
 
