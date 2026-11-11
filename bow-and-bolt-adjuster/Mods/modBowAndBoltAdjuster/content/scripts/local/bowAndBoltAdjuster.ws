@@ -102,8 +102,6 @@ function SetBehaviorGraphVariables(varName : name, flag : bool, optional num : i
 	if (isPlayer && flag && BBA_On() && (varName == 'isAimingWeapon' || varName == 'isShootingWeapon'))
 	{
 		BBA_ApplyUnlimited();
-		if (varName == 'isAimingWeapon')
-			BBA_EquipDefaultBolt();
 		BBA_SpeedUp(BBA_FireRate());
 	}
 }
