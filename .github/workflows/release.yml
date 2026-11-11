@@ -1,0 +1,25 @@
+# Baut fuer jede Mod ein Release mit ZIP (Vortex-tauglich).
+# Ausloeser: Tag im Format <modordner>-v<version>, z.B. bow-and-bolt-adjuster-v1.0.0
+name: Mod Release
+on:
+  push:
+    tags: ['*-v*']
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: ZIP bauen
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          MOD="${TAG%-v*}"
+          test -d "$MOD" || { echo "Ordner $MOD fehlt"; exit 1; }
+          cd "$MOD"
+          zip -r "../${TAG}.zip" . -x "*.md" -x "*.zip"
+          echo "MOD=$MOD" >> "$GITHUB_ENV"
+      - name: Release erstellen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" "${GITHUB_REF_NAME}.zip" --title "$GITHUB_REF_NAME" --notes-file "$MOD/README.md"

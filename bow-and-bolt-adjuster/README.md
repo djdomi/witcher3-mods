@@ -23,13 +23,13 @@ Im Spiel unter **Optionen → Mods → Cheats**:
 
 ## Installieren mit Vortex
 
-1. `bow-and-bolt-adjuster-vortex.zip` herunterladen.
+1. Die ZIP unter [Releases](https://github.com/djdomi/witcher3-mods/releases) herunterladen.
 2. Die ZIP in Vortex ziehen (Mods → Datei hier ablegen), dann **Installieren** und **Aktivieren**.
 3. Einmal `install.bat` im Spielordner doppelklicken, damit das Menü erscheint.
 
 ## Installieren von Hand (3 Schritte)
 
-1. Den Ordner `bow-and-bolt-adjuster` herunterladen.
+1. Die ZIP unter [Releases](https://github.com/djdomi/witcher3-mods/releases) herunterladen und entpacken.
 2. **Alles darin** (`Mods`, `bin`, `install.bat`) in den Witcher-3-Spielordner kopieren.
    Beispiel Steam: `C:\Program Files (x86)\Steam\steamapps\common\The Witcher 3`
 3. Dort `install.bat` doppelklicken. Fertig.
@@ -71,13 +71,13 @@ In game under **Options → Mods → Cheats**:
 
 ## Install with Vortex
 
-1. Download `bow-and-bolt-adjuster-vortex.zip`.
+1. Download the ZIP from [Releases](https://github.com/djdomi/witcher3-mods/releases).
 2. Drag the ZIP into Vortex (Mods → drop file here), then **Install** and **Enable**.
 3. Double-click `install.bat` in the game folder once so the menu shows up.
 
 ## Manual install (3 steps)
 
-1. Download the `bow-and-bolt-adjuster` folder.
+1. Download the ZIP from [Releases](https://github.com/djdomi/witcher3-mods/releases) and unpack it.
 2. Copy **everything inside** (`Mods`, `bin`, `install.bat`) into your Witcher 3 game folder.
    Steam example: `C:\Program Files (x86)\Steam\steamapps\common\The Witcher 3`
 3. Double-click `install.bat` there. Done.
