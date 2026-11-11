@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Horse and Feet Adjuster - https://github.com/djdomi/witcher3-mods - License: AGPL-3.0 -->
+<UserConfig>
+	<Group id="HFA_Main" displayName="Horse and Feet Adjuster" tags="customDisplayName">
+		<VisibleVars>
+			<Var id="HFA_Enabled" displayName="Mod enabled" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="HFA_Sep1" displayName="" displayType="SUBTLE_SEPARATOR"/>
+			<Var id="HFA_FeetOn" displayName="On foot: change running speed" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="HFA_FeetFactor" displayName="On foot: running speed (x)" displayType="SLIDER;1;5;40" tags="nonLocalizedName"/>
+			<Var id="HFA_Sep2" displayName="" displayType="SUBTLE_SEPARATOR"/>
+			<Var id="HFA_HorseOn" displayName="Horse: change speed" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="HFA_HorseFactor" displayName="Horse: speed (x)" displayType="SLIDER;1;5;40" tags="nonLocalizedName"/>
+			<Var id="HFA_Sep3" displayName="" displayType="SUBTLE_SEPARATOR"/>
+			<Var id="HFA_AltOn" displayName="Hold ALT for boost (replaces walk toggle)" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="HFA_AltFactor" displayName="ALT boost (x)" displayType="SLIDER;1;5;40" tags="nonLocalizedName"/>
+		</VisibleVars>
+	</Group>
+</UserConfig>
