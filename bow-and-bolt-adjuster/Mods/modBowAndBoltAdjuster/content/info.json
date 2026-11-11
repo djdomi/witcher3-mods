@@ -1,0 +1,13 @@
+{
+    "name": "bow and bolt adjuster",
+    "modName": "Bow-and-Bolt Adjuster",
+    "version": "1.0.2",
+    "gameVersion": "29",
+    "description": "Crossbow and bolt cheat menu. https://github.com/djdomi/witcher3-mods (AGPL-3.0)",
+    "author": "djdomi",
+    "idSpace": 47110000,
+    "workshopId": 0,
+    "succesfullyCooked": true,
+    "dependencies": [],
+    "useLooseScripts": true
+}
