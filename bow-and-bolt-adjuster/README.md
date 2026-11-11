@@ -24,6 +24,8 @@ In game: open the **pause menu → Bow and Bolt**.
 **Bolts**
 - Speed: slider 1x to 1000x
 - Damage: choose 1x to 100000x
+- Unlimited bolts: special bolts are never used up
+- Default bolt: your chosen bolt stays equipped (no more falling back to standard bolts; underwater the game still uses harpoon bolts)
 
 ### Install with Vortex
 
@@ -67,6 +69,8 @@ Im Spiel: **Pausemenü → Bow and Bolt** öffnen.
 **Bolzen**
 - Geschwindigkeit: Schieber 1x bis 1000x
 - Schaden: Auswahl 1x bis 100000x
+- Unbegrenzte Bolzen: Spezial-Bolzen werden nie verbraucht
+- Standard-Bolzen: dein gewählter Bolzen bleibt ausgerüstet (kein Zurückfallen auf Standardbolzen; unter Wasser nutzt das Spiel weiter Harpunen-Bolzen)
 
 ### Installieren mit Vortex
 
