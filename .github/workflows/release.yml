@@ -1,9 +1,15 @@
-# Baut fuer jede Mod ein Release mit ZIP (Vortex-tauglich).
-# Ausloeser: Tag im Format <modordner>-v<version>, z.B. bow-and-bolt-adjuster-v1.0.0
+# Baut fuer eine Mod ein Release mit ZIP (Vortex-tauglich).
+# Start: GitHub > Actions > "Mod Release" > Run workflow (Modordner + Version eingeben)
 name: Mod Release
 on:
-  push:
-    tags: ['*-v*']
+  workflow_dispatch:
+    inputs:
+      mod:
+        description: 'Modordner, z.B. bow-and-bolt-adjuster'
+        required: true
+      version:
+        description: 'Version, z.B. 1.0.0'
+        required: true
 permissions:
   contents: write
 jobs:
@@ -11,15 +17,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: ZIP bauen
-        run: |
-          TAG="${GITHUB_REF_NAME}"
-          MOD="${TAG%-v*}"
-          test -d "$MOD" || { echo "Ordner $MOD fehlt"; exit 1; }
-          cd "$MOD"
-          zip -r "../${TAG}.zip" . -x "*.md" -x "*.zip"
-          echo "MOD=$MOD" >> "$GITHUB_ENV"
-      - name: Release erstellen
+      - name: ZIP bauen und Release erstellen
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" "${GITHUB_REF_NAME}.zip" --title "$GITHUB_REF_NAME" --notes-file "$MOD/README.md"
+          MOD: ${{ inputs.mod }}
+          VER: ${{ inputs.version }}
+        run: |
+          test -d "$MOD" || { echo "Ordner $MOD fehlt"; exit 1; }
+          TAG="${MOD}-v${VER}"
+          (cd "$MOD" && zip -r "../${TAG}.zip" . -x "*.md" -x "*.zip")
+          gh release create "$TAG" "${TAG}.zip" --target "$GITHUB_SHA" --title "$TAG" --notes-file "$MOD/README.md"
