@@ -110,7 +110,7 @@ function OnEntryPress(tag : name)
 function OnCraftItem(tag : name)
 {
 	if (!IC_inPress && tag == IC_pressTag && theGame.GetEngineTimeAsSeconds() - IC_pressTime < 3.0)
-		return;
+		return false;
 	wrappedMethod(tag);
 }
 
@@ -203,6 +203,6 @@ function OnEntryPress(tag : name)
 function OnCraftItem(tag : name)
 {
 	if (!IC_inPress && tag == IC_pressTag && theGame.GetEngineTimeAsSeconds() - IC_pressTime < 3.0)
-		return;
+		return false;
 	wrappedMethod(tag);
 }
