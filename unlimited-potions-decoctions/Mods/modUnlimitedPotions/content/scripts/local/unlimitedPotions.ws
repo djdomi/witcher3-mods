@@ -1,7 +1,7 @@
 // Unlimited Potions & Decoctions - The Witcher 3 Remastered (5.0+)
 // https://github.com/djdomi/witcher3-mods - License: AGPL-3.0
 // 1) Traenke ohne Vergiftungs-Limit  2) Alle Absude per Schalter aktiv
-// Schalter: Pausemenue > Unlimited Potions
+// Schalter: Pausemenue > Mod Menu > Unlimited Potions
 
 // Gift-Modus: 0 = kein Gift (Standard), 1 = 1 Punkt pro Trank, 2 = normal wie im Spiel
 function UP_ToxMode() : int
@@ -149,7 +149,7 @@ timer function UP_Tick(dt : float, id : int)
 	if (on) upDecOn = 1; else upDecOn = 2;
 }
 
-// ================= Pausemenue-Eintrag "Unlimited Potions" (5.0) =================
+// ================= Pausemenue: Mod Menu > Unlimited Potions (5.0) =================
 function UP_SetDefaults(wrapper : CInGameConfigWrapper)
 {
 	if (wrapper.GetVarValue('UP_Main', 'UP_Toxicity') == "")
@@ -188,12 +188,17 @@ function UP_BuildMenuOptions(storage : CScriptedFlashValueStorage) : CScriptedFl
 	return root.GetMemberFlashArray("subElements");
 }
 
+// Gemeinsames "Mod Menu" (id "djmods_menu") fuer alle Mods aus djdomi/witcher3-mods:
+// gibt es den Eintrag schon (von einer anderen Mod), haengen wir uns darunter,
+// sonst legen wir ihn an (nach "Cheats", sonst nach "Einstellungen").
 @wrapMethod(IngameMenuStructureCreator)
 function PopulateMenuData() : CScriptedFlashArray
 {
 	var src : CScriptedFlashArray;
 	var dst : CScriptedFlashArray;
 	var menuItem : CScriptedFlashObject;
+	var modMenu : CScriptedFlashObject;
+	var subs : CScriptedFlashArray;
 	var upItem : CScriptedFlashObject;
 	var i : int;
 	var after : string;
@@ -209,7 +214,7 @@ function PopulateMenuData() : CScriptedFlashArray
 	upItem.SetMemberFlashString("listTitle", "Unlimited Potions");
 	upItem.SetMemberFlashArray("subElements", UP_BuildMenuOptions(m_flashValueStorage));
 
-	// hinter anderen Mod-Menues einfuegen, sonst hinter "Einstellungen"
+	// Gibt es das Mod Menu schon?
 	after = "mainmenu_options";
 	for (i = 0; i < src.GetLength(); i += 1)
 	{
@@ -217,9 +222,24 @@ function PopulateMenuData() : CScriptedFlashArray
 		if (!menuItem)
 			continue;
 		id = menuItem.GetMemberFlashString("id");
-		if (id == "wqol_cheats" || id == "bba_menu")
+		if (id == "djmods_menu")
+		{
+			subs = menuItem.GetMemberFlashArray("subElements");
+			subs.PushBackFlashObject(upItem);
+			menuItem.SetMemberFlashArray("subElements", subs);
+			return src;
+		}
+		if (id == "wqol_cheats")
 			after = id;
 	}
+
+	// Nein: anlegen
+	modMenu = CreateMenuItem("djmods_menu", "Mod Menu", NameToFlashUInt('DJModsMenu'), IGMActionType_MenuHolder, false, "Mod Menu");
+	modMenu.SetMemberFlashString("label", "Mod Menu");
+	modMenu.SetMemberFlashString("listTitle", "Mod Menu");
+	subs = m_flashValueStorage.CreateTempFlashArray();
+	subs.PushBackFlashObject(upItem);
+	modMenu.SetMemberFlashArray("subElements", subs);
 
 	dst = m_flashValueStorage.CreateTempFlashArray();
 	placed = false;
@@ -229,12 +249,12 @@ function PopulateMenuData() : CScriptedFlashArray
 		dst.PushBackFlashObject(menuItem);
 		if (!placed && menuItem && menuItem.GetMemberFlashString("id") == after)
 		{
-			dst.PushBackFlashObject(upItem);
+			dst.PushBackFlashObject(modMenu);
 			placed = true;
 		}
 	}
 	if (!placed)
-		dst.PushBackFlashObject(upItem);
+		dst.PushBackFlashObject(modMenu);
 
 	return dst;
 }

@@ -9,7 +9,7 @@ Cheat mod for **The Witcher 3 – Remastered (version 5.0 or newer)**.
 - **Potions without toxicity limit:** drink all your potions one after another.
 - **All decoctions with one toggle:** all 28 decoctions are always active, no drinking needed.
 
-In game: open the **pause menu → Unlimited Potions**:
+In game: open the **pause menu → Mod Menu → Unlimited Potions**:
 
 | Setting | Choice |
 |---|---|
@@ -58,7 +58,7 @@ Cheat-Mod für **The Witcher 3 – Remastered (Version 5.0 oder neuer)**.
 - **Tränke ohne Vergiftungs-Limit:** Du kannst alle Tränke hintereinander trinken.
 - **Alle Absude per Schalter:** Alle 28 Absude wirken dauerhaft, ohne sie zu trinken.
 
-Im Spiel: **Pausemenü → Unlimited Potions** öffnen:
+Im Spiel: **Pausemenü → Mod Menu → Unlimited Potions** öffnen:
 
 | Einstellung | Auswahl |
 |---|---|
