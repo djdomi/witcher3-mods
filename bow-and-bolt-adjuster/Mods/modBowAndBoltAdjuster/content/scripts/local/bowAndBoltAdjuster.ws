@@ -1,6 +1,6 @@
-// Bow-and-Bolt Adjuster - Witcher 3 Next-Gen (4.0+)
+// Bow-and-Bolt Adjuster - The Witcher 3 Remastered (5.0+)
 // https://github.com/djdomi/witcher3-mods - License: AGPL-3.0 (SPDX: AGPL-3.0-only)
-// Armbrust- und Bolzen-Einstellungen im Menue: Optionen > Mods > Cheats
+// Armbrust- und Bolzen-Einstellungen im Pausemenue: "Bow and Bolt"
 
 // ---------- Einstellungen lesen ----------
 function BBA_Get(grp : name, v : name, dflt : float) : float
@@ -163,4 +163,80 @@ function ProcessActionDamage_DealDamage()
 	if (action && (W3BoltProjectile)action.causer && action.attacker == thePlayer && BBA_On())
 		action.MultiplyAllDamageBy(BBA_BoltDamage());
 	wrappedMethod();
+}
+
+// ---- Pausemenue-Eintrag "Bow and Bolt" (wie Witcher3Cheats: eigener Punkt mit festem Namen) ----
+function BBA_BuildMenuOptions( storage : CScriptedFlashValueStorage ) : CScriptedFlashArray
+{
+	var wrapper : CInGameConfigWrapper;
+	var groupId : int;
+	var i : int;
+	var root : CScriptedFlashObject;
+	var options : CScriptedFlashArray;
+
+	options = storage.CreateTempFlashArray();
+	wrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
+	if ( !wrapper )
+		return options;
+
+	groupId = -1;
+	for ( i = 0; i < wrapper.GetGroupsNum(); i += 1 )
+	{
+		if ( wrapper.GetGroupName( i ) == 'BBA_Bow' )
+			groupId = i;
+	}
+	if ( groupId < 0 )
+		return options;
+
+	root = storage.CreateTempFlashObject();
+	root.SetMemberFlashArray( "subElements", options );
+	IngameMenu_FillSubMenuOptionsList( storage, groupId, 'BBA_Bow', root );
+	return root.GetMemberFlashArray( "subElements" );
+}
+
+@wrapMethod(IngameMenuStructureCreator)
+function PopulateMenuData() : CScriptedFlashArray
+{
+	var src : CScriptedFlashArray;
+	var dst : CScriptedFlashArray;
+	var menuItem : CScriptedFlashObject;
+	var bbaItem : CScriptedFlashObject;
+	var i : int;
+	var after : string;
+	var placed : bool;
+
+	src = wrappedMethod();
+	if ( !parentMenu || parentMenu.isMainMenu )
+		return src;
+
+	bbaItem = CreateMenuItem( "bba_menu", "Bow and Bolt", NameToFlashUInt( 'BBAMenu' ), IGMActionType_MenuLastHolder, false, "Bow and Bolt" );
+	bbaItem.SetMemberFlashString( "label", "Bow and Bolt" );
+	bbaItem.SetMemberFlashString( "listTitle", "Bow and Bolt" );
+	bbaItem.SetMemberFlashArray( "subElements", BBA_BuildMenuOptions( m_flashValueStorage ) );
+
+	// nach "Cheats" einfuegen, sonst nach "Einstellungen"
+	after = "mainmenu_options";
+	for ( i = 0; i < src.GetLength(); i += 1 )
+	{
+		menuItem = src.GetElementFlashObject( i );
+		if ( menuItem && menuItem.GetMemberFlashString( "id" ) == "wqol_cheats" )
+			after = "wqol_cheats";
+	}
+
+	dst = m_flashValueStorage.CreateTempFlashArray();
+	placed = false;
+	for ( i = 0; i < src.GetLength(); i += 1 )
+	{
+		menuItem = src.GetElementFlashObject( i );
+		dst.PushBackFlashObject( menuItem );
+		if ( !placed && menuItem && menuItem.GetMemberFlashString( "id" ) == after )
+		{
+			dst.PushBackFlashObject( bbaItem );
+			placed = true;
+		}
+	}
+	if ( !placed )
+		dst.PushBackFlashObject( bbaItem );
+
+	return dst;
 }
