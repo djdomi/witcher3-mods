@@ -1,5 +1,7 @@
 # Bow-and-Bolt Adjuster
 
+🇩🇪 Deutsch · [🇬🇧 English](#english)
+
 Cheat-Mod für **The Witcher 3 – Next-Gen (Version 4.0 oder neuer)**.
 Stellt die Armbrust und die Bolzen im Spielmenü ein.
 
@@ -37,3 +39,45 @@ Im Spiel unter **Optionen → Mods → Cheats**:
 
 Ordner `Mods\modBowAndBoltAdjuster` und die Datei
 `bin\config\r4game\user_config_matrix\pc\modBowAndBoltAdjuster.xml` löschen.
+
+---
+
+# English
+
+Cheat mod for **The Witcher 3 – Next-Gen (version 4.0 or newer)**.
+Adjusts the crossbow and bolts from the in-game menu.
+
+> Note: Witcher 3 has no bow, only the crossbow. "Bow-Settings" applies to the crossbow.
+
+## Features
+
+In game under **Options → Mods → Cheats**:
+
+**Bow_Settings (crossbow)**
+- Mod on/off
+- Fire speed: 1x to 10x
+- Shots before reload: 1, 2, 3, 5, 10, 25 or **Automatic** (never reload)
+- Reload speed: 1x to 10x
+
+**Bolt_Settings (bolts)**
+- Speed: slider 1x to 1000x
+- Damage: choose 1x to 100000x
+
+## Install (3 steps)
+
+1. Download the `bow-and-bolt-adjuster` folder.
+2. Copy **everything inside** (`Mods`, `bin`, `install.bat`) into your Witcher 3 game folder.
+   Steam example: `C:\Program Files (x86)\Steam\steamapps\common\The Witcher 3`
+3. Double-click `install.bat` there. Done.
+
+## Known limits
+
+- Menu texts are not translated yet (underscores instead of spaces).
+- Very high bolt speed can make bolts pass through enemies.
+- Fire speed briefly speeds up Geralt's movement while aiming.
+- Not tested in game yet. Please report bugs.
+
+## Uninstall
+
+Delete the folder `Mods\modBowAndBoltAdjuster` and the file
+`bin\config\r4game\user_config_matrix\pc\modBowAndBoltAdjuster.xml`.
