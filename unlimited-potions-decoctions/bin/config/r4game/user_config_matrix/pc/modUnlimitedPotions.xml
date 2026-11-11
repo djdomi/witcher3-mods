@@ -1,22 +1,16 @@
-<?xml version="1.0" encoding="UTF-16"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- https://github.com/djdomi/witcher3-mods - License: AGPL-3.0 -->
 <UserConfig>
-  <Group id="UP_Main" displayName="Mods.Cheats.Unlimited_Potions">
-    <PresetsArray>
-      <Preset id="0" displayName="Standard">
-        <Entry varId="UP_Toxicity" value="0" />
-        <Entry varId="UP_Decoctions" value="true" />
-      </Preset>
-    </PresetsArray>
-    <VisibleVars>
-      <Var id="UP_Toxicity" displayName="Gift_durch_Traenke" displayType="OPTIONS">
-        <OptionsArray>
-          <Option id="0" displayName="Kein_Gift" />
-          <Option id="1" displayName="1_pro_Trank" />
-          <Option id="2" displayName="Normal" />
-        </OptionsArray>
-      </Var>
-      <Var id="UP_Decoctions" displayName="Alle_Absude_aktiv" displayType="TOGGLE" />
-    </VisibleVars>
-  </Group>
+	<Group id="UP_Main" displayName="Mods.Cheats.Unlimited Potions" tags="customDisplayName">
+		<VisibleVars>
+			<Var id="UP_Toxicity" displayName="Potion toxicity" displayType="OPTIONS" tags="nonLocalizedName">
+				<OptionsArray>
+					<Option id="0" displayName="None (default)"/>
+					<Option id="1" displayName="1 per potion"/>
+					<Option id="2" displayName="Normal (game)"/>
+				</OptionsArray>
+			</Var>
+			<Var id="UP_Decoctions" displayName="All decoctions active" displayType="TOGGLE" tags="nonLocalizedName"/>
+		</VisibleVars>
+	</Group>
 </UserConfig>

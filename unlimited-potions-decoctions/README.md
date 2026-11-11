@@ -9,16 +9,16 @@ Cheat mod for **The Witcher 3 – Next-Gen (version 4.0 or newer)**.
 - **Potions without toxicity limit:** drink all your potions one after another.
 - **All decoctions with one toggle:** all 28 decoctions are always active, no drinking needed.
 
-Settings in game under **Options → Mods → Cheats → Unlimited_Potions**:
+Settings in game under **Options → Mods → Cheats → Unlimited Potions**:
 
 | Setting | Choice |
 |---|---|
-| Gift_durch_Traenke (toxicity) | **Kein_Gift** = none (default) · **1_pro_Trank** = 1 per potion · **Normal** |
-| Alle_Absude_aktiv (all decoctions) | on (default) / off |
+| Potion toxicity | **None (default)** · **1 per potion** · **Normal (game)** |
+| All decoctions active | on (default) / off |
 
-- **Kein_Gift:** potions give no toxicity at all.
-- **1_pro_Trank:** each potion gives only 1 toxicity. Good for skills that need toxicity (e.g. the "Euphoria" mutation).
-- **Normal:** like the normal game.
+- **None:** potions give no toxicity at all.
+- **1 per potion:** each potion gives only 1 toxicity. Good for skills that need toxicity (e.g. the "Euphoria" mutation).
+- **Normal (game):** like the normal game.
 
 Takes effect after about 2 seconds, also in old saves. Decoctions you drink yourself no longer lock toxicity.
 
@@ -36,7 +36,7 @@ Takes effect after about 2 seconds, also in old saves. Decoctions you drink your
 
 ## Important
 
-- **Before uninstalling:** set "Alle_Absude_aktiv" **off** and toxicity to **Normal**, wait a moment, then save. Otherwise the decoctions stay in the save.
+- **Before uninstalling:** set "All decoctions active" **off** and "Potion toxicity" to **Normal (game)**, wait a moment, then save. Otherwise the decoctions stay in the save.
 - Do not combine with other mods that change toxicity or decoctions.
 - Not tested in game yet. Please report bugs.
 
@@ -60,16 +60,16 @@ Cheat-Mod für **The Witcher 3 – Next-Gen (Version 4.0 oder neuer)**.
 - **Tränke ohne Vergiftungs-Limit:** Du kannst alle Tränke hintereinander trinken.
 - **Alle Absude per Schalter:** Alle 28 Absude wirken dauerhaft, ohne sie zu trinken.
 
-Einstellen im Spiel unter **Optionen → Mods → Cheats → Unlimited_Potions**:
+Einstellen im Spiel unter **Optionen → Mods → Cheats → Unlimited Potions**:
 
 | Einstellung | Auswahl |
 |---|---|
-| Gift_durch_Traenke | **Kein_Gift** (Standard) · **1_pro_Trank** · **Normal** |
-| Alle_Absude_aktiv | an (Standard) / aus |
+| Potion toxicity | **None (default)** · **1 per potion** · **Normal (game)** |
+| All decoctions active | an (Standard) / aus |
 
-- **Kein_Gift:** Tränke vergiften gar nicht. Die Gift-Anzeige bleibt leer.
-- **1_pro_Trank:** Jeder Trank gibt nur 1 Punkt Gift. Gut, wenn du Fähigkeiten nutzt, die Gift brauchen (z. B. die Mutation „Euphorie“).
-- **Normal:** wie im normalen Spiel.
+- **None:** Tränke vergiften gar nicht. Die Gift-Anzeige bleibt leer.
+- **1 per potion:** Jeder Trank gibt nur 1 Punkt Gift. Gut, wenn du Fähigkeiten nutzt, die Gift brauchen (z. B. die Mutation „Euphorie“).
+- **Normal (game):** wie im normalen Spiel.
 
 Wirkt nach ca. 2 Sekunden, auch in alten Spielständen. Selbst getrunkene Absude sperren kein Gift mehr.
 
@@ -87,7 +87,7 @@ Wirkt nach ca. 2 Sekunden, auch in alten Spielständen. Selbst getrunkene Absude
 
 ## Wichtig
 
-- **Vor dem Deinstallieren:** „Alle_Absude_aktiv“ **aus** und Gift auf **Normal**, kurz warten, dann speichern. Sonst bleiben die Absude im Spielstand.
+- **Vor dem Deinstallieren:** „All decoctions active“ **aus** und „Potion toxicity“ auf **Normal (game)**, kurz warten, dann speichern. Sonst bleiben die Absude im Spielstand.
 - Nicht zusammen mit anderen Mods nutzen, die Gift oder Absude ändern.
 - Noch nicht im Spiel getestet. Fehler bitte melden.
 
