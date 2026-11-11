@@ -21,7 +21,13 @@ Im Spiel unter **Optionen → Mods → Cheats**:
 - Geschwindigkeit: Schieber 1x bis 1000x
 - Schaden: Auswahl 1x bis 100000x
 
-## Installieren (3 Schritte)
+## Installieren mit Vortex
+
+1. `bow-and-bolt-adjuster-vortex.zip` herunterladen.
+2. Die ZIP in Vortex ziehen (Mods → Datei hier ablegen), dann **Installieren** und **Aktivieren**.
+3. Einmal `install.bat` im Spielordner doppelklicken, damit das Menü erscheint.
+
+## Installieren von Hand (3 Schritte)
 
 1. Den Ordner `bow-and-bolt-adjuster` herunterladen.
 2. **Alles darin** (`Mods`, `bin`, `install.bat`) in den Witcher-3-Spielordner kopieren.
@@ -63,7 +69,13 @@ In game under **Options → Mods → Cheats**:
 - Speed: slider 1x to 1000x
 - Damage: choose 1x to 100000x
 
-## Install (3 steps)
+## Install with Vortex
+
+1. Download `bow-and-bolt-adjuster-vortex.zip`.
+2. Drag the ZIP into Vortex (Mods → drop file here), then **Install** and **Enable**.
+3. Double-click `install.bat` in the game folder once so the menu shows up.
+
+## Manual install (3 steps)
 
 1. Download the `bow-and-bolt-adjuster` folder.
 2. Copy **everything inside** (`Mods`, `bin`, `install.bat`) into your Witcher 3 game folder.
