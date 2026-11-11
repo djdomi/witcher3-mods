@@ -1,6 +1,6 @@
 # Bow-and-Bolt Adjuster
 
-🇩🇪 Deutsch · [🇬🇧 English](#english)
+Deutsch · [English](#english)
 
 Cheat-Mod für **The Witcher 3 – Next-Gen (Version 4.0 oder neuer)**.
 Stellt die Armbrust und die Bolzen im Spielmenü ein.

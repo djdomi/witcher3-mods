@@ -1,6 +1,6 @@
 # All Skills & Mutations
 
-🇩🇪 Deutsch · [🇬🇧 English](#english)
+Deutsch · [English](#english)
 
 Cheat-Mod für **The Witcher 3 – Next-Gen (Version 4.0 oder neuer)**.
 
