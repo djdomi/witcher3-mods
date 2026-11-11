@@ -10,6 +10,10 @@ on:
       version:
         description: 'Version, z.B. 1.0.0'
         required: true
+      prerelease:
+        description: 'Test-Version (Pre-Release, ohne install.bat)'
+        type: boolean
+        default: false
 permissions:
   contents: write
 jobs:
@@ -22,9 +26,13 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           MOD: ${{ inputs.mod }}
           VER: ${{ inputs.version }}
+          PRE: ${{ inputs.prerelease }}
         run: |
           test -d "$MOD" || { echo "Ordner $MOD fehlt"; exit 1; }
           TAG="${MOD}-v${VER}"
           cp LICENSE "$MOD/LICENSE.txt"
-          (cd "$MOD" && zip -r "../${TAG}.zip" . -x "*.md" -x "*.zip")
-          gh release create "$TAG" "${TAG}.zip" --target "$GITHUB_SHA" --title "$TAG" --notes-file "$MOD/README.md"
+          EXTRA=""; FLAG=""
+          if [ "$PRE" = "true" ]; then EXTRA="-x install.bat"; FLAG="--prerelease"; fi
+          (cd "$MOD" && zip -r "../${TAG}.zip" . -x "*.md" -x "*.zip" $EXTRA)
+          unzip -l "${TAG}.zip"
+          gh release create "$TAG" "${TAG}.zip" $FLAG --target "$GITHUB_SHA" --title "$TAG" --notes-file "$MOD/README.md"
