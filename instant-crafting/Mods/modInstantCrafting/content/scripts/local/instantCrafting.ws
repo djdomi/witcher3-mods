@@ -27,6 +27,14 @@ function IC_AllRecipeNames(defName : name) : array<name>
 	return ret;
 }
 
+// Schalter aus dem Mod Menu (leer = an) / toggle from Mod Menu (empty = on)
+function IC_On(v : name) : bool
+{
+	var s : string;
+	s = theGame.GetInGameConfigWrapper().GetVarValue('IC_Settings', v);
+	return s == "" || s == "true";
+}
+
 // ---------- Alchemie / alchemy ----------
 
 // Fehlende Zutaten nicht pruefen
@@ -35,7 +43,7 @@ function CanCookRecipe(recipeName : name, optional ignorePlayerState : bool) : E
 {
 	var res : EAlchemyExceptions;
 	res = wrappedMethod(recipeName, ignorePlayerState);
-	if (res == EAE_NotEnoughIngredients)
+	if (res == EAE_NotEnoughIngredients && IC_On('IC_FreeMaterials'))
 		return EAE_NoException;
 	return res;
 }
@@ -71,7 +79,8 @@ function IC_AddMissingIngredients(recipeName : name)
 @wrapMethod(W3AlchemyManager)
 function CookItem(recipeName : name)
 {
-	IC_AddMissingIngredients(recipeName);
+	if (IC_On('IC_FreeMaterials'))
+		IC_AddMissingIngredients(recipeName);
 	wrappedMethod(recipeName);
 }
 
@@ -87,6 +96,7 @@ var IC_inPress : bool;
 function OnConfigUI()
 {
 	wrappedMethod();
+	if (!IC_On('IC_AllRecipes')) return false;
 	m_alchemyManager = new W3AlchemyManager in this;
 	m_alchemyManager.Init(IC_AllRecipeNames('alchemy_recipes'));
 	m_recipeList = m_alchemyManager.GetRecipes(false);
@@ -98,6 +108,7 @@ function OnConfigUI()
 function OnEntryPress(tag : name)
 {
 	wrappedMethod(tag);
+	if (!IC_On('IC_Instant')) return false;
 	IC_inPress = true;
 	OnCraftItem(tag);
 	IC_inPress = false;
@@ -122,7 +133,9 @@ function CanCraftSchematic(schematicName : name, checkMerchant : bool) : ECrafti
 {
 	var res : ECraftingException;
 	res = wrappedMethod(schematicName, checkMerchant);
-	if (res == ECE_TooFewIngredients || res == ECE_WrongCraftsmanType || res == ECE_TooLowCraftsmanLevel || res == ECE_NotEnoughMoney)
+	if ((res == ECE_TooFewIngredients || res == ECE_NotEnoughMoney) && IC_On('IC_FreeMaterials'))
+		return ECE_NoException;
+	if ((res == ECE_WrongCraftsmanType || res == ECE_TooLowCraftsmanLevel) && IC_On('IC_AnyCraftsman'))
 		return ECE_NoException;
 	return res;
 }
@@ -165,7 +178,8 @@ function IC_AddMissing(schemName : name)
 @wrapMethod(W3CraftingManager)
 function Craft(schemName : name, out item : SItemUniqueId) : ECraftingException
 {
-	IC_AddMissing(schemName);
+	if (IC_On('IC_FreeMaterials'))
+		IC_AddMissing(schemName);
 	return wrappedMethod(schemName, item);
 }
 
@@ -181,6 +195,7 @@ var IC_inPress : bool;
 function OnConfigUI()
 {
 	wrappedMethod();
+	if (!IC_On('IC_AllRecipes')) return false;
 	m_craftingManager = new W3CraftingManager in this;
 	m_craftingManager.IC_InitAll(_craftsmanComponent);
 	m_schematicList = IC_AllRecipeNames('crafting_schematics');
@@ -192,6 +207,7 @@ function OnConfigUI()
 function OnEntryPress(tag : name)
 {
 	wrappedMethod(tag);
+	if (!IC_On('IC_Instant')) return false;
 	IC_inPress = true;
 	OnCraftItem(tag);
 	IC_inPress = false;
@@ -205,4 +221,109 @@ function OnCraftItem(tag : name)
 	if (!IC_inPress && tag == IC_pressTag && theGame.GetEngineTimeAsSeconds() - IC_pressTime < 3.0)
 		return false;
 	wrappedMethod(tag);
+}
+
+// ---------- Mod Menu (Pausemenue > Mod Menu > Instant Crafting) ----------
+
+function IC_Default( wrapper : CInGameConfigWrapper, v : name )
+{
+	if ( wrapper.GetVarValue( 'IC_Settings', v ) == "" )
+		wrapper.SetVarValue( 'IC_Settings', v, "true" );
+}
+
+function IC_BuildMenuOptions( storage : CScriptedFlashValueStorage ) : CScriptedFlashArray
+{
+	var wrapper : CInGameConfigWrapper;
+	var groupId : int;
+	var i : int;
+	var root : CScriptedFlashObject;
+	var options : CScriptedFlashArray;
+
+	options = storage.CreateTempFlashArray();
+	wrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
+	if ( !wrapper )
+		return options;
+	groupId = -1;
+	for ( i = 0; i < wrapper.GetGroupsNum(); i += 1 )
+	{
+		if ( wrapper.GetGroupName( i ) == 'IC_Settings' )
+			groupId = i;
+	}
+	if ( groupId < 0 )
+		return options;
+
+	IC_Default( wrapper, 'IC_Instant' );
+	IC_Default( wrapper, 'IC_FreeMaterials' );
+	IC_Default( wrapper, 'IC_AllRecipes' );
+	IC_Default( wrapper, 'IC_AnyCraftsman' );
+
+	root = storage.CreateTempFlashObject();
+	root.SetMemberFlashArray( "subElements", options );
+	IngameMenu_FillSubMenuOptionsList( storage, groupId, 'IC_Settings', root );
+	return root.GetMemberFlashArray( "subElements" );
+}
+
+@wrapMethod(IngameMenuStructureCreator)
+function PopulateMenuData() : CScriptedFlashArray
+{
+	var src : CScriptedFlashArray;
+	var dst : CScriptedFlashArray;
+	var menuItem : CScriptedFlashObject;
+	var modMenu : CScriptedFlashObject;
+	var modList : CScriptedFlashArray;
+	var myItem : CScriptedFlashObject;
+	var i : int;
+	var after : string;
+	var placed : bool;
+
+	src = wrappedMethod();
+	if ( !parentMenu || parentMenu.isMainMenu )
+		return src;
+
+	myItem = CreateMenuItem( "ic_menu", "Instant Crafting", NameToFlashUInt( 'ICMenu' ), IGMActionType_MenuLastHolder, false, "Instant Crafting" );
+	myItem.SetMemberFlashString( "label", "Instant Crafting" );
+	myItem.SetMemberFlashString( "listTitle", "Instant Crafting" );
+	myItem.SetMemberFlashArray( "subElements", IC_BuildMenuOptions( m_flashValueStorage ) );
+
+	for ( i = 0; i < src.GetLength(); i += 1 )
+	{
+		menuItem = src.GetElementFlashObject( i );
+		if ( menuItem && menuItem.GetMemberFlashString( "id" ) == "djdomi_modmenu" )
+		{
+			modList = menuItem.GetMemberFlashArray( "subElements" );
+			modList.PushBackFlashObject( myItem );
+			menuItem.SetMemberFlashArray( "subElements", modList );
+			return src;
+		}
+	}
+
+	modMenu = CreateMenuItem( "djdomi_modmenu", "Mod Menu", NameToFlashUInt( 'DjdomiModMenu' ), IGMActionType_MenuHolder, false, "Mod Menu" );
+	modMenu.SetMemberFlashString( "label", "Mod Menu" );
+	modMenu.SetMemberFlashString( "listTitle", "Mod Menu" );
+	modList = m_flashValueStorage.CreateTempFlashArray();
+	modList.PushBackFlashObject( myItem );
+	modMenu.SetMemberFlashArray( "subElements", modList );
+
+	after = "mainmenu_options";
+	for ( i = 0; i < src.GetLength(); i += 1 )
+	{
+		menuItem = src.GetElementFlashObject( i );
+		if ( menuItem && menuItem.GetMemberFlashString( "id" ) == "wqol_cheats" )
+			after = "wqol_cheats";
+	}
+	dst = m_flashValueStorage.CreateTempFlashArray();
+	placed = false;
+	for ( i = 0; i < src.GetLength(); i += 1 )
+	{
+		menuItem = src.GetElementFlashObject( i );
+		dst.PushBackFlashObject( menuItem );
+		if ( !placed && menuItem && menuItem.GetMemberFlashString( "id" ) == after )
+		{
+			dst.PushBackFlashObject( modMenu );
+			placed = true;
+		}
+	}
+	if ( !placed )
+		dst.PushBackFlashObject( modMenu );
+	return dst;
 }

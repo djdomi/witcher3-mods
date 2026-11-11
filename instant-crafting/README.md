@@ -16,6 +16,15 @@ Cheat mod for **The Witcher 3 Remastered (version 5.0 or newer)**.
 
 Still blocked by the game: crafting while in combat or on horseback, and making a second copy of items you can only have once (e.g. bombs/potions are refilled at meditation).
 
+## Settings
+
+In game: pause menu, **Mod Menu**, then **Instant Crafting**. All four switches are on by default:
+
+- **Craft with one click**
+- **Free missing materials and coins**
+- **All recipes and diagrams**
+- **Any craftsman can craft everything**
+
 ## Install with Vortex
 
 1. Download the ZIP from [Releases](https://github.com/djdomi/witcher3-mods/releases).
@@ -24,11 +33,11 @@ Still blocked by the game: crafting while in combat or on horseback, and making 
 
 ## Manual install
 
-Unpack the ZIP and copy the `Mods` folder into your Witcher 3 game folder.
+Unpack the ZIP and copy the folders `Mods` and `bin` into your Witcher 3 game folder.
 
 ## Uninstall
 
-Disable/remove it in Vortex, or delete the folder `Mods\modInstantCrafting`.
+Disable/remove it in Vortex, or delete the folder `Mods\modInstantCrafting` and the file `bin\config\r4game\user_config_matrix\pc\modInstantCrafting.xml`.
 
 ## Notes
 
@@ -57,6 +66,15 @@ Cheat-Mod für **The Witcher 3 Remastered (Version 5.0 oder neuer)**.
 
 Weiterhin gesperrt durch das Spiel: Herstellen im Kampf oder auf dem Pferd, und eine zweite Kopie von Dingen, die man nur einmal haben kann (z. B. Bomben/Tränke werden beim Meditieren aufgefüllt).
 
+## Einstellungen
+
+Im Spiel: Pausemenü, **Mod Menu**, dann **Instant Crafting**. Alle vier Schalter sind standardmäßig an:
+
+- **Craft with one click** (ein Klick stellt her)
+- **Free missing materials and coins** (fehlende Materialien und Geld gratis)
+- **All recipes and diagrams** (alle Rezepte und Diagramme)
+- **Any craftsman can craft everything** (jeder Handwerker kann alles)
+
 ## Installieren mit Vortex
 
 1. Die ZIP unter [Releases](https://github.com/djdomi/witcher3-mods/releases) herunterladen.
@@ -65,11 +83,11 @@ Weiterhin gesperrt durch das Spiel: Herstellen im Kampf oder auf dem Pferd, und 
 
 ## Manuell installieren
 
-ZIP entpacken und den Ordner `Mods` in den Witcher-3-Spielordner kopieren.
+ZIP entpacken und die Ordner `Mods` und `bin` in den Witcher-3-Spielordner kopieren.
 
 ## Deinstallieren
 
-In Vortex deaktivieren/entfernen, oder den Ordner `Mods\modInstantCrafting` löschen.
+In Vortex deaktivieren/entfernen, oder den Ordner `Mods\modInstantCrafting` und die Datei `bin\config\r4game\user_config_matrix\pc\modInstantCrafting.xml` löschen.
 
 ## Hinweise
 

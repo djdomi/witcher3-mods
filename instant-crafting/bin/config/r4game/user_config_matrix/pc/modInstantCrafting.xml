@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://github.com/djdomi/witcher3-mods - License: AGPL-3.0 -->
+<UserConfig>
+	<Group id="IC_Settings" displayName="Instant Crafting" tags="customDisplayName">
+		<VisibleVars>
+			<Var id="IC_Instant" displayName="Craft with one click" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="IC_FreeMaterials" displayName="Free missing materials and coins" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="IC_AllRecipes" displayName="All recipes and diagrams" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="IC_AnyCraftsman" displayName="Any craftsman can craft everything" displayType="TOGGLE" tags="nonLocalizedName"/>
+		</VisibleVars>
+	</Group>
+</UserConfig>
