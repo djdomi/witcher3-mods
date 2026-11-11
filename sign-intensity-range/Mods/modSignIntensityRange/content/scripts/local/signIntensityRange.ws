@@ -48,7 +48,7 @@ function SIR_Range() : float { return ClampF(SIR_Get('SIR_Range', 100), 100, 500
 	wrappedMethod();
 
 	if (sirRangeDone || !SIR_On()) return;
-	if (!(W3PlayerWitcher)owner.GetActor()) return; // nur Geralt
+	if (owner.GetActor() != thePlayer) return; // nur Geralt
 	m = SIR_Range();
 	if (m <= 1.0) return;
 
@@ -93,7 +93,7 @@ function SIR_Range() : float { return ClampF(SIR_Get('SIR_Range', 100), 100, 500
 	wrappedMethod();
 
 	if (!SIR_On()) return;
-	if (!(W3PlayerWitcher)owner.GetActor()) return; // nur Geralt
+	if (owner.GetActor() != thePlayer) return; // nur Geralt
 	m = SIR_Range();
 	if (m <= 1.0) return;
 
