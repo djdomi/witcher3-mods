@@ -99,7 +99,9 @@ timer function BBA_SpeedTimer(dt : float, id : int)
 function SetBehaviorGraphVariables(varName : name, flag : bool, optional num : int)
 {
 	wrappedMethod(varName, flag, num);
-	if (isPlayer && flag && BBA_On() && (varName == 'isAimingWeapon' || varName == 'isShootingWeapon'))
+	// nur wenn die Armbrust schon gezogen ist (nicht beim Ziehen beschleunigen)
+	if (isPlayer && flag && BBA_On() && (varName == 'isAimingWeapon' || varName == 'isShootingWeapon')
+		&& (GetCurrentStateName() == 'State_WeaponAim' || GetCurrentStateName() == 'State_WeaponShoot'))
 		BBA_SpeedUp(BBA_FireRate());
 }
 
@@ -109,7 +111,8 @@ function ReloadWeaponWithOrWithoutAnimIfNeeded() : bool
 {
 	var r : bool;
 	r = wrappedMethod();
-	if (r && isPlayer && BBA_On())
+	// nicht beim Ziehen der Waffe (Spiel laedt dabei nach)
+	if (r && isPlayer && BBA_On() && GetCurrentStateName() != 'State_WeaponDraw' && GetCurrentStateName() != 'State_WeaponWait')
 	{
 		SetBehaviorVariable('animSpeedMult', BBA_ReloadRate());
 		BBA_SpeedUp(BBA_ReloadRate());
