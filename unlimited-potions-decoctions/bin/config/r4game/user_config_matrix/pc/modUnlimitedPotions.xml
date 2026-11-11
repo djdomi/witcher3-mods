@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- https://github.com/djdomi/witcher3-mods - License: AGPL-3.0 -->
 <UserConfig>
-	<Group id="UP_Main" displayName="Mods.Cheats.Unlimited Potions" tags="customDisplayName">
+	<Group id="UP_Main" displayName="Unlimited Potions" tags="customDisplayName">
 		<VisibleVars>
 			<Var id="UP_Toxicity" displayName="Potion toxicity" displayType="OPTIONS" tags="nonLocalizedName">
 				<OptionsArray>

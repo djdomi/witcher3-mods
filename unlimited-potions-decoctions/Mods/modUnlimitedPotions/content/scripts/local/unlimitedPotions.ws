@@ -1,7 +1,7 @@
 // Unlimited Potions & Decoctions - Witcher 3 Next-Gen (4.0+)
 // https://github.com/djdomi/witcher3-mods - License: AGPL-3.0
 // 1) Traenke ohne Vergiftungs-Limit  2) Alle Absude per Schalter aktiv
-// Schalter: Optionen > Mods > Cheats > Unlimited_Potions
+// Schalter: Optionen > Unlimited Potions
 
 // Gift-Modus: 0 = kein Gift (Standard), 1 = 1 Punkt pro Trank, 2 = normal wie im Spiel
 function UP_ToxMode() : int

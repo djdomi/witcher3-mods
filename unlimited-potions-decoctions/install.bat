@@ -10,5 +10,5 @@ if not exist "bin\config\r4game\user_config_matrix\pc" (
 for %%F in (dx11filelist.txt dx12filelist.txt) do (
   findstr /C:"modUnlimitedPotions.xml" "bin\config\r4game\user_config_matrix\pc\%%F" >nul 2>&1 || echo modUnlimitedPotions.xml;>>"bin\config\r4game\user_config_matrix\pc\%%F"
 )
-echo Fertig! Spiel starten: Optionen ^> Mods ^> Cheats
+echo Fertig! Spiel starten: Optionen ^> Unlimited Potions
 pause

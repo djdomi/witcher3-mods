@@ -9,7 +9,7 @@ Cheat mod for **The Witcher 3 – Next-Gen (version 4.0 or newer)**.
 - **Potions without toxicity limit:** drink all your potions one after another.
 - **All decoctions with one toggle:** all 28 decoctions are always active, no drinking needed.
 
-Settings in game under **Options → Mods → Cheats → Unlimited Potions**:
+Settings in game in the **Options** menu under **Unlimited Potions**:
 
 | Setting | Choice |
 |---|---|
@@ -60,7 +60,7 @@ Cheat-Mod für **The Witcher 3 – Next-Gen (Version 4.0 oder neuer)**.
 - **Tränke ohne Vergiftungs-Limit:** Du kannst alle Tränke hintereinander trinken.
 - **Alle Absude per Schalter:** Alle 28 Absude wirken dauerhaft, ohne sie zu trinken.
 
-Einstellen im Spiel unter **Optionen → Mods → Cheats → Unlimited Potions**:
+Einstellen im Spiel im Menü **Optionen** unter **Unlimited Potions**:
 
 | Einstellung | Auswahl |
 |---|---|
