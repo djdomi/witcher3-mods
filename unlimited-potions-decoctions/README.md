@@ -2,14 +2,14 @@
 
 English · [Deutsch](#deutsch)
 
-Cheat mod for **The Witcher 3 – Next-Gen (version 4.0 or newer)**.
+Cheat mod for **The Witcher 3 – Remastered (version 5.0 or newer)**.
 
 ## Features
 
 - **Potions without toxicity limit:** drink all your potions one after another.
 - **All decoctions with one toggle:** all 28 decoctions are always active, no drinking needed.
 
-Settings in game in the **Options** menu under **Unlimited Potions**:
+In game: open the **pause menu → Unlimited Potions**:
 
 | Setting | Choice |
 |---|---|
@@ -25,14 +25,12 @@ Takes effect after about 2 seconds, also in old saves. Decoctions you drink your
 ## Install with Vortex
 
 1. Download the ZIP from [Releases](https://github.com/djdomi/witcher3-mods/releases).
-2. Drag the ZIP into Vortex, then **Install** and **Enable**.
-3. Double-click `install.bat` in the game folder once so the menu shows up.
+2. Drag the ZIP into Vortex, then **Install**, **Enable** and **Deploy**.
 
 ## Manual install
 
 1. Download the ZIP and unpack it.
-2. Copy **everything inside** (`Mods`, `bin`, `install.bat`) into your Witcher 3 game folder.
-3. Double-click `install.bat` there. Done.
+2. Copy `Mods` and `bin` into your Witcher 3 game folder. Done.
 
 ## Important
 
@@ -42,7 +40,7 @@ Takes effect after about 2 seconds, also in old saves. Decoctions you drink your
 
 ## Uninstall
 
-Delete the folder `Mods\modUnlimitedPotions` and the file
+Disable the mod in Vortex, or delete the folder `Mods\modUnlimitedPotions`, the file `bin\config\base\unlimitedpotions.ini` and the file
 `bin\config\r4game\user_config_matrix\pc\modUnlimitedPotions.xml`.
 
 ## Source & License
@@ -53,14 +51,14 @@ https://github.com/djdomi/witcher3-mods · License: **AGPL-3.0** (see [LICENSE](
 
 # Deutsch
 
-Cheat-Mod für **The Witcher 3 – Next-Gen (Version 4.0 oder neuer)**.
+Cheat-Mod für **The Witcher 3 – Remastered (Version 5.0 oder neuer)**.
 
 ## Was die Mod kann
 
 - **Tränke ohne Vergiftungs-Limit:** Du kannst alle Tränke hintereinander trinken.
 - **Alle Absude per Schalter:** Alle 28 Absude wirken dauerhaft, ohne sie zu trinken.
 
-Einstellen im Spiel im Menü **Optionen** unter **Unlimited Potions**:
+Im Spiel: **Pausemenü → Unlimited Potions** öffnen:
 
 | Einstellung | Auswahl |
 |---|---|
@@ -76,14 +74,12 @@ Wirkt nach ca. 2 Sekunden, auch in alten Spielständen. Selbst getrunkene Absude
 ## Installieren mit Vortex
 
 1. Die ZIP unter [Releases](https://github.com/djdomi/witcher3-mods/releases) herunterladen.
-2. Die ZIP in Vortex ziehen, dann **Installieren** und **Aktivieren**.
-3. Einmal `install.bat` im Spielordner doppelklicken, damit das Menü erscheint.
+2. Die ZIP in Vortex ziehen, dann **Installieren**, **Aktivieren** und **Bereitstellen (Deploy)**.
 
 ## Installieren von Hand
 
 1. ZIP herunterladen und entpacken.
-2. **Alles darin** (`Mods`, `bin`, `install.bat`) in den Witcher-3-Spielordner kopieren.
-3. Dort `install.bat` doppelklicken. Fertig.
+2. `Mods` und `bin` in den Witcher-3-Spielordner kopieren. Fertig.
 
 ## Wichtig
 
@@ -93,7 +89,7 @@ Wirkt nach ca. 2 Sekunden, auch in alten Spielständen. Selbst getrunkene Absude
 
 ## Deinstallieren
 
-Ordner `Mods\modUnlimitedPotions` und die Datei
+Mod in Vortex deaktivieren, oder den Ordner `Mods\modUnlimitedPotions`, die Datei `bin\config\base\unlimitedpotions.ini` und die Datei
 `bin\config\r4game\user_config_matrix\pc\modUnlimitedPotions.xml` löschen.
 
 ## Quelle & Lizenz
