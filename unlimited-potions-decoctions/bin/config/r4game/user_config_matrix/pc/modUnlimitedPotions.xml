@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-16"?>
+<!-- https://github.com/djdomi/witcher3-mods - License: AGPL-3.0 -->
 <UserConfig>
   <Group id="UP_Main" displayName="Mods.Cheats.Unlimited_Potions">
     <PresetsArray>

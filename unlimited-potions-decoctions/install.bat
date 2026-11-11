@@ -1,5 +1,6 @@
 @echo off
 REM Unlimited Potions & Decoctions - Installer
+REM https://github.com/djdomi/witcher3-mods - License: AGPL-3.0
 REM Alles aus diesem Ordner in den Witcher-3-Spielordner kopieren, dann hier doppelklicken.
 if not exist "bin\config\r4game\user_config_matrix\pc" (
   echo FEHLER: Bitte diese Datei in den Witcher-3-Spielordner legen.
