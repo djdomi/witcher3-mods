@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Godlike Aerondight - https://github.com/djdomi/witcher3-mods - License: AGPL-3.0 -->
+<UserConfig>
+	<Group id="GA_Main" displayName="Godlike Aerondight" tags="customDisplayName">
+		<VisibleVars>
+			<Var id="GA_Enabled" displayName="Mod enabled" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="GA_Sep1" displayName="" displayType="SUBTLE_SEPARATOR"/>
+			<Var id="GA_MinDmg" displayName="Min damage per hit (0 = default, never above max)" displayType="SLIDER;0;10000;100" tags="nonLocalizedName"/>
+			<Var id="GA_MaxDmg" displayName="Max damage per hit (0 = default)" displayType="SLIDER;0;20000;200" tags="nonLocalizedName"/>
+			<Var id="GA_DamageMult" displayName="Damage multiplier (x)" displayType="SLIDER;1;100;99" tags="nonLocalizedName"/>
+			<Var id="GA_Sep2" displayName="" displayType="SUBTLE_SEPARATOR"/>
+			<Var id="GA_FullCharge" displayName="Always fully charged" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="GA_AlwaysCrit" displayName="Every hit is critical" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="GA_IgnoreArmor" displayName="Ignore armor and resistances" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="GA_LifeSteal" displayName="Life steal" displayType="OPTIONS" tags="nonLocalizedName;nonLocalized;customNames">
+				<OptionsArray>
+					<Option id="0" displayName="Off"/>
+					<Option id="1" displayName="10%"/>
+					<Option id="2" displayName="25%"/>
+					<Option id="3" displayName="50%"/>
+					<Option id="4" displayName="100%"/>
+				</OptionsArray>
+			</Var>
+			<Var id="GA_Sep3" displayName="" displayType="SUBTLE_SEPARATOR"/>
+			<Var id="GA_Bleeding" displayName="Hits cause bleeding" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="GA_Burning" displayName="Hits set on fire" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="GA_Poison" displayName="Hits poison" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="GA_Freeze" displayName="Hits freeze" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="GA_Knockdown" displayName="Hits knock down" displayType="TOGGLE" tags="nonLocalizedName"/>
+		</VisibleVars>
+	</Group>
+</UserConfig>
