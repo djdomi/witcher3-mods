@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- https://github.com/djdomi/witcher3-mods - License: AGPL-3.0 -->
 <UserConfig>
-	<Group id="BBA_Bow" displayName="Mods.Cheats.BowSettings">
+	<Group id="BBA_Bow" displayName="Bow Settings" tags="customDisplayName">
 		<VisibleVars>
 			<Var id="BBA_Enabled" displayName="Mod enabled" displayType="TOGGLE" tags="nonLocalizedName"/>
 			<Var id="BBA_FireRate" displayName="Fire speed (x)" displayType="SLIDER;1;10;90" tags="nonLocalizedName"/>
@@ -19,7 +19,7 @@
 			<Var id="BBA_ReloadRate" displayName="Reload speed (x)" displayType="SLIDER;1;10;90" tags="nonLocalizedName"/>
 		</VisibleVars>
 	</Group>
-	<Group id="BBA_Bolt" displayName="Mods.Cheats.BoltSettings">
+	<Group id="BBA_Bolt" displayName="Bolt Settings" tags="customDisplayName">
 		<VisibleVars>
 			<Var id="BBA_BoltSpeed" displayName="Bolt speed (x)" displayType="SLIDER;1;1000;999" tags="nonLocalizedName"/>
 			<Var id="BBA_BoltDamage" displayName="Bolt damage (x)" displayType="OPTIONS" tags="nonLocalizedName">

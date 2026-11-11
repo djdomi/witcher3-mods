@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- https://github.com/djdomi/witcher3-mods - License: AGPL-3.0 -->
 <UserConfig>
-	<Group id="ASM_Main" displayName="Mods.Cheats.AllSkillsAndMutations">
+	<Group id="ASM_Main" displayName="All Skills and Mutations" tags="customDisplayName">
 		<VisibleVars>
 			<Var id="ASM_Skills" displayName="All learned skills active" displayType="TOGGLE" tags="nonLocalizedName"/>
 			<Var id="ASM_Mutations" displayName="All researched mutations active" displayType="TOGGLE" tags="nonLocalizedName"/>
