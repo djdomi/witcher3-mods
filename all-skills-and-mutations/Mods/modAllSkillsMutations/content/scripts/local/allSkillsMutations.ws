@@ -208,7 +208,7 @@ function ASM_BuildMenuOptions( storage : CScriptedFlashValueStorage ) : CScripte
 	return root.GetMemberFlashArray( "subElements" );
 }
 
-// Gemeinsames "Mod Menu" (gleiche id "djmods_modmenu" in allen Mods von djdomi/witcher3-mods):
+// Gemeinsames "Mod Menu" (gleiche id "djdomi_modmenu" in allen Mods von djdomi/witcher3-mods):
 // Die erste Mod legt den Punkt an, jede weitere haengt nur ihr Untermenue an.
 @wrapMethod(IngameMenuStructureCreator)
 function PopulateMenuData() : CScriptedFlashArray
@@ -232,7 +232,7 @@ function PopulateMenuData() : CScriptedFlashArray
 	for ( i = 0; i < src.GetLength(); i += 1 )
 	{
 		menuItem = src.GetElementFlashObject( i );
-		if ( menuItem && menuItem.GetMemberFlashString( "id" ) == "djmods_modmenu" )
+		if ( menuItem && menuItem.GetMemberFlashString( "id" ) == "djdomi_modmenu" )
 		{
 			subs = menuItem.GetMemberFlashArray( "subElements" );
 			subs.PushBackFlashObject( asmItem );
@@ -242,10 +242,10 @@ function PopulateMenuData() : CScriptedFlashArray
 	}
 
 	// Nein: "Mod Menu" neu anlegen
-	modMenu = CreateMenuItem( "djmods_modmenu", "Mod Menu", NameToFlashUInt( 'DJModsModMenu' ), IGMActionType_MenuHolder, true, "Mod Menu" );
+	modMenu = CreateMenuItem( "djdomi_modmenu", "Mod Menu", NameToFlashUInt( 'DjdomiModMenu' ), IGMActionType_MenuHolder, false, "Mod Menu" );
 	modMenu.SetMemberFlashString( "label", "Mod Menu" );
 	modMenu.SetMemberFlashString( "listTitle", "Mod Menu" );
-	subs = modMenu.GetMemberFlashArray( "subElements" );
+	subs = m_flashValueStorage.CreateTempFlashArray();
 	subs.PushBackFlashObject( asmItem );
 	modMenu.SetMemberFlashArray( "subElements", subs );
 
