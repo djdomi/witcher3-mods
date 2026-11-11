@@ -38,12 +38,12 @@ function BBA_Shots() : int
 
 function BBA_FireRate() : float   { return ClampF(BBA_Get('BBA_Bow', 'BBA_FireRate', 1), 1, 10); }
 function BBA_ReloadRate() : float { return ClampF(BBA_Get('BBA_Bow', 'BBA_ReloadRate', 1), 1, 10); }
-function BBA_BoltSpeed() : float  { return ClampF(BBA_Get('BBA_Bolt', 'BBA_BoltSpeed', 1), 1, 1000); }
+function BBA_BoltSpeed() : float  { return ClampF(BBA_Get('BBA_Bow', 'BBA_BoltSpeed', 1), 1, 1000); }
 
 function BBA_BoltDamage() : float
 {
 	var i : int;
-	i = (int)BBA_Get('BBA_Bolt', 'BBA_BoltDamage', 0);
+	i = (int)BBA_Get('BBA_Bow', 'BBA_BoltDamage', 0);
 	switch (i)
 	{
 		case 1: return 2;

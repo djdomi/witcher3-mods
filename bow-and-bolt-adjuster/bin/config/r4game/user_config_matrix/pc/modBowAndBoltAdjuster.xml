@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- https://github.com/djdomi/witcher3-mods - License: AGPL-3.0 -->
 <UserConfig>
-	<Group id="BBA_Bow" displayName="Bow Settings" tags="customDisplayName">
+	<Group id="BBA_Bow" displayName="Bow and Bolt" tags="customDisplayName">
 		<VisibleVars>
 			<Var id="BBA_Enabled" displayName="Mod enabled" displayType="TOGGLE" tags="nonLocalizedName"/>
-			<Var id="BBA_FireRate" displayName="Fire speed (x)" displayType="SLIDER;1;10;90" tags="nonLocalizedName"/>
-			<Var id="BBA_Shots" displayName="Shots before reload" displayType="OPTIONS" tags="nonLocalizedName">
+			<Var id="BBA_BowSeparator" displayName="" displayType="SUBTLE_SEPARATOR"/>
+			<Var id="BBA_FireRate" displayName="Crossbow: fire speed (x)" displayType="SLIDER;1;10;90" tags="nonLocalizedName"/>
+			<Var id="BBA_Shots" displayName="Crossbow: shots before reload" displayType="OPTIONS" tags="nonLocalizedName">
 				<OptionsArray>
 					<Option id="0" displayName="1 (default)"/>
 					<Option id="1" displayName="2"/>
@@ -16,13 +17,10 @@
 					<Option id="6" displayName="Automatic (no reload)"/>
 				</OptionsArray>
 			</Var>
-			<Var id="BBA_ReloadRate" displayName="Reload speed (x)" displayType="SLIDER;1;10;90" tags="nonLocalizedName"/>
-		</VisibleVars>
-	</Group>
-	<Group id="BBA_Bolt" displayName="Bolt Settings" tags="customDisplayName">
-		<VisibleVars>
-			<Var id="BBA_BoltSpeed" displayName="Bolt speed (x)" displayType="SLIDER;1;1000;999" tags="nonLocalizedName"/>
-			<Var id="BBA_BoltDamage" displayName="Bolt damage (x)" displayType="OPTIONS" tags="nonLocalizedName">
+			<Var id="BBA_ReloadRate" displayName="Crossbow: reload speed (x)" displayType="SLIDER;1;10;90" tags="nonLocalizedName"/>
+			<Var id="BBA_BoltSeparator" displayName="" displayType="SUBTLE_SEPARATOR"/>
+			<Var id="BBA_BoltSpeed" displayName="Bolts: speed (x)" displayType="SLIDER;1;1000;999" tags="nonLocalizedName"/>
+			<Var id="BBA_BoltDamage" displayName="Bolts: damage (x)" displayType="OPTIONS" tags="nonLocalizedName">
 				<OptionsArray>
 					<Option id="0" displayName="1x"/>
 					<Option id="1" displayName="2x"/>
