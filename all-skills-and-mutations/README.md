@@ -13,7 +13,7 @@ Cheat mod for **The Witcher 3 – Remastered (version 5.0 or newer)**.
 - **All learned skills work at the same time**, even without a slot.
 - **All researched mutations work at the same time** (Blood and Wine). Keep one mutation equipped as usual, the others work on top.
 
-Toggle in game: open the **pause menu → All Skills and Mutations**.
+Toggle in game: open the **pause menu → Mod Menu → All Skills and Mutations**.
 Both are **on** by default. Takes effect after about 2 seconds, also in old saves.
 
 Same idea as the known mods "All Skills Always Active" and "Slots Slots SLOTS", but written from scratch and without Script Merger.
@@ -51,7 +51,7 @@ Cheat-Mod für **The Witcher 3 – Remastered (Version 5.0 oder neuer)**.
 - **Alle gelernten Fähigkeiten wirken gleichzeitig**, auch ohne Slot.
 - **Alle erforschten Mutationen wirken gleichzeitig** (Blood and Wine). Eine Mutation musst du weiter normal einsetzen, die anderen wirken zusätzlich.
 
-Ein- und ausschalten im Spiel: **Pausemenü → All Skills and Mutations** öffnen.
+Ein- und ausschalten im Spiel: **Pausemenü → Mod Menu → All Skills and Mutations** öffnen.
 Beides ist ab Start **an**. Wirkt nach ca. 2 Sekunden, auch in alten Spielständen.
 
 Idee wie bei den bekannten Mods „All Skills Always Active“ und „Slots Slots SLOTS“, aber selbst geschrieben und ohne Script Merger.

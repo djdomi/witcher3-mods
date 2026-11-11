@@ -1,7 +1,7 @@
 // All Skills & Mutations - The Witcher 3 Remastered (5.0+)
 // https://github.com/djdomi/witcher3-mods - License: AGPL-3.0 (SPDX: AGPL-3.0-only)
 // Alle gelernten Faehigkeiten und alle erforschten Mutationen gleichzeitig aktiv.
-// Schalter im Pausemenue: "All Skills and Mutations"
+// Schalter im Pausemenue: Mod Menu > All Skills and Mutations
 
 // Leer (noch nie eingestellt) = AN
 function ASM_Opt(v : name) : bool
@@ -170,7 +170,7 @@ timer function ASM_Tick(dt : float, id : int)
 	}
 }
 
-// ================= Pausemenue-Eintrag "All Skills and Mutations" =================
+// ================= Pausemenue: Mod Menu > All Skills and Mutations =================
 function ASM_SetDefaults( wrapper : CInGameConfigWrapper )
 {
 	if ( wrapper.GetVarValue( 'ASM_Main', 'ASM_Skills' ) == "" )
@@ -208,11 +208,13 @@ function ASM_BuildMenuOptions( storage : CScriptedFlashValueStorage ) : CScripte
 	return root.GetMemberFlashArray( "subElements" );
 }
 
+// Gemeinsames "Mod Menu" (gleiche id "djmods_modmenu" in allen Mods von djdomi/witcher3-mods):
+// Die erste Mod legt den Punkt an, jede weitere haengt nur ihr Untermenue an.
 @wrapMethod(IngameMenuStructureCreator)
 function PopulateMenuData() : CScriptedFlashArray
 {
-	var src, dst : CScriptedFlashArray;
-	var menuItem, asmItem : CScriptedFlashObject;
+	var src, dst, subs : CScriptedFlashArray;
+	var menuItem, modMenu, asmItem : CScriptedFlashObject;
 	var i : int;
 	var after : string;
 	var placed : bool;
@@ -225,6 +227,27 @@ function PopulateMenuData() : CScriptedFlashArray
 	asmItem.SetMemberFlashString( "label", "All Skills and Mutations" );
 	asmItem.SetMemberFlashString( "listTitle", "All Skills and Mutations" );
 	asmItem.SetMemberFlashArray( "subElements", ASM_BuildMenuOptions( m_flashValueStorage ) );
+
+	// Gibt es "Mod Menu" schon (von einer anderen Mod)?
+	for ( i = 0; i < src.GetLength(); i += 1 )
+	{
+		menuItem = src.GetElementFlashObject( i );
+		if ( menuItem && menuItem.GetMemberFlashString( "id" ) == "djmods_modmenu" )
+		{
+			subs = menuItem.GetMemberFlashArray( "subElements" );
+			subs.PushBackFlashObject( asmItem );
+			menuItem.SetMemberFlashArray( "subElements", subs );
+			return src;
+		}
+	}
+
+	// Nein: "Mod Menu" neu anlegen
+	modMenu = CreateMenuItem( "djmods_modmenu", "Mod Menu", NameToFlashUInt( 'DJModsModMenu' ), IGMActionType_MenuHolder, true, "Mod Menu" );
+	modMenu.SetMemberFlashString( "label", "Mod Menu" );
+	modMenu.SetMemberFlashString( "listTitle", "Mod Menu" );
+	subs = modMenu.GetMemberFlashArray( "subElements" );
+	subs.PushBackFlashObject( asmItem );
+	modMenu.SetMemberFlashArray( "subElements", subs );
 
 	// nach "Cheats" einfuegen, sonst nach "Einstellungen"
 	after = "mainmenu_options";
@@ -243,12 +266,12 @@ function PopulateMenuData() : CScriptedFlashArray
 		dst.PushBackFlashObject( menuItem );
 		if ( !placed && menuItem && menuItem.GetMemberFlashString( "id" ) == after )
 		{
-			dst.PushBackFlashObject( asmItem );
+			dst.PushBackFlashObject( modMenu );
 			placed = true;
 		}
 	}
 	if ( !placed )
-		dst.PushBackFlashObject( asmItem );
+		dst.PushBackFlashObject( modMenu );
 
 	return dst;
 }
