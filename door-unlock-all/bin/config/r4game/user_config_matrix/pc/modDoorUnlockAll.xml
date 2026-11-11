@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://github.com/djdomi/witcher3-mods - License: AGPL-3.0 -->
+<UserConfig>
+	<Group id="DUA_Main" displayName="Door Unlock All" tags="customDisplayName">
+		<VisibleVars>
+			<Var id="DUA_Enabled" displayName="Unlock all doors" displayType="TOGGLE" tags="nonLocalizedName"/>
+		</VisibleVars>
+	</Group>
+</UserConfig>

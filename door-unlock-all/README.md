@@ -15,7 +15,7 @@ Every locked door in the game is unlocked. You no longer need a key.
 - Doors locked later by a quest are unlocked again right away.
 - Keys stay in your inventory.
 - Only doors. Chests and big gates are not changed.
-- No menu, no settings: install it and it works.
+- On/off switch in the pause menu: **Mod Menu → Door Unlock All → Unlock all doors** (default: on).
 
 ### Install with Vortex
 
@@ -25,12 +25,12 @@ Every locked door in the game is unlocked. You no longer need a key.
 ### Manual install
 
 1. Download the ZIP from [Releases](https://github.com/djdomi/witcher3-mods/releases) and unpack it.
-2. Copy `Mods` into your Witcher 3 game folder. Done.
+2. Copy `Mods` and `bin` into your Witcher 3 game folder. Done.
 
 ### Known limits
 
 - Some quests lock doors on purpose. Going through early can skip or break a quest step. Make a save first.
-- Doors you opened stay unlocked in your save, even after removing the mod.
+- Doors you opened stay unlocked in your save, even after switching the mod off or removing it.
 
 ---
 
@@ -45,7 +45,7 @@ Jede verschlossene Tür im Spiel ist offen. Du brauchst keinen Schlüssel mehr.
 - Türen, die eine Quest später abschließt, werden sofort wieder aufgeschlossen.
 - Schlüssel bleiben im Inventar.
 - Nur Türen. Truhen und große Tore bleiben unverändert.
-- Kein Menü, keine Einstellungen: installieren, fertig.
+- Schalter an/aus im Pausemenü: **Mod Menu → Door Unlock All → Unlock all doors** (Standard: an).
 
 ### Installation mit Vortex
 
@@ -55,9 +55,9 @@ Jede verschlossene Tür im Spiel ist offen. Du brauchst keinen Schlüssel mehr.
 ### Manuelle Installation
 
 1. ZIP unter [Releases](https://github.com/djdomi/witcher3-mods/releases) herunterladen und entpacken.
-2. Den Ordner `Mods` in den Witcher-3-Spielordner kopieren. Fertig.
+2. Die Ordner `Mods` und `bin` in den Witcher-3-Spielordner kopieren. Fertig.
 
 ### Bekannte Grenzen
 
 - Manche Quests schließen Türen absichtlich ab. Wer zu früh hindurchgeht, kann einen Quest-Schritt überspringen oder kaputt machen. Vorher speichern.
-- Geöffnete Türen bleiben im Spielstand offen, auch nach dem Entfernen der Mod.
+- Geöffnete Türen bleiben im Spielstand offen, auch nach dem Ausschalten oder Entfernen der Mod.
