@@ -321,6 +321,7 @@ function BBA_EquipDefaultBolt()
 	var ids : array<SItemUniqueId>;
 	var cur : SItemUniqueId;
 	var weapon : SItemUniqueId;
+	var curName : name;
 
 	p = GetWitcherPlayer();
 	if (!p || p.bbaBoltBusy)
@@ -332,8 +333,12 @@ function BBA_EquipDefaultBolt()
 		return;
 	if (p.ShouldUseInfiniteWaterBolts())
 		return;
-	if (p.GetItemEquippedOnSlot(EES_Bolt, cur) && p.inv.GetItemName(cur) == boltName)
-		return;
+	if (p.GetItemEquippedOnSlot(EES_Bolt, cur))
+	{
+		curName = p.inv.GetItemName(cur);
+		if (curName != 'Bodkin Bolt' && curName != 'Harpoon Bolt')
+			return; // Spieler hat bewusst einen Bolzen gewaehlt
+	}
 
 	ids = p.inv.GetItemsByName(boltName);
 	if (ids.Size() == 0 && BBA_Unlimited())
