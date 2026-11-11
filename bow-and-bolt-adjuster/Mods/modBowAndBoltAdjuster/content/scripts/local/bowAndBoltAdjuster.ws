@@ -232,7 +232,7 @@ function BBA_BuildMenuOptions( storage : CScriptedFlashValueStorage ) : CScripte
 
 // Gemeinsames "Mod Menu" im Pausemenue (alle Mods von djdomi/witcher3-mods):
 // Pausemenue > Mod Menu > Bow and Bolt > Einstellungen.
-// Jede Mod sucht den Eintrag "mod_menu"; gibt es ihn noch nicht, legt sie ihn an.
+// Jede Mod sucht den Eintrag "djdomi_modmenu"; gibt es ihn noch nicht, legt sie ihn an.
 @wrapMethod(IngameMenuStructureCreator)
 function PopulateMenuData() : CScriptedFlashArray
 {
@@ -259,7 +259,7 @@ function PopulateMenuData() : CScriptedFlashArray
 	for ( i = 0; i < src.GetLength(); i += 1 )
 	{
 		menuItem = src.GetElementFlashObject( i );
-		if ( menuItem && menuItem.GetMemberFlashString( "id" ) == "mod_menu" )
+		if ( menuItem && menuItem.GetMemberFlashString( "id" ) == "djdomi_modmenu" )
 		{
 			modList = menuItem.GetMemberFlashArray( "subElements" );
 			modList.PushBackFlashObject( bbaItem );
@@ -269,7 +269,7 @@ function PopulateMenuData() : CScriptedFlashArray
 	}
 
 	// noch keins da: anlegen
-	modMenu = CreateMenuItem( "mod_menu", "Mod Menu", NameToFlashUInt( 'ModMenu' ), IGMActionType_MenuHolder, false, "Mod Menu" );
+	modMenu = CreateMenuItem( "djdomi_modmenu", "Mod Menu", NameToFlashUInt( 'ModMenu' ), IGMActionType_MenuHolder, false, "Mod Menu" );
 	modMenu.SetMemberFlashString( "label", "Mod Menu" );
 	modMenu.SetMemberFlashString( "listTitle", "Mod Menu" );
 	modList = m_flashValueStorage.CreateTempFlashArray();
