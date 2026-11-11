@@ -37,17 +37,6 @@
 					<Option id="12" displayName="100000x"/>
 				</OptionsArray>
 			</Var>
-			<Var id="BBA_Unlimited" displayName="Bolts: unlimited (never used up)" displayType="TOGGLE" tags="nonLocalizedName"/>
-			<Var id="BBA_DefaultBolt" displayName="Bolts: default bolt" displayType="OPTIONS" tags="nonLocalizedName;nonLocalized;customNames">
-				<OptionsArray>
-					<Option id="0" displayName="Game default"/>
-					<Option id="1" displayName="Blunt Bolt"/>
-					<Option id="2" displayName="Broadhead Bolt"/>
-					<Option id="3" displayName="Target Point Bolt"/>
-					<Option id="4" displayName="Split Bolt"/>
-					<Option id="5" displayName="Explosive Bolt"/>
-				</OptionsArray>
-			</Var>
 		</VisibleVars>
 	</Group>
 </UserConfig>
