@@ -338,9 +338,10 @@ function BBA_EquipDefaultBolt()
 			return; // Spieler hat bewusst einen Bolzen gewaehlt
 	}
 
+	// mit 'unlimited' immer mindestens 10 Stueck im Inventar, damit das Spiel nachladen kann
+	if (BBA_Unlimited() && p.inv.GetItemQuantityByName(boltName) < 10)
+		p.inv.AddAnItem(boltName, 10 - p.inv.GetItemQuantityByName(boltName), true, true);
 	ids = p.inv.GetItemsByName(boltName);
-	if (ids.Size() == 0 && BBA_Unlimited())
-		ids = p.inv.AddAnItem(boltName, 1, true, true);
 	if (ids.Size() == 0)
 		return;
 
