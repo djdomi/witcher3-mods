@@ -283,13 +283,20 @@ function BBA_Unlimited() : bool
 // Spiel verbraucht keinen Bolzen, wenn dieser (Spiel-eigene) Fakt existiert
 function BBA_ApplyUnlimited()
 {
+	// Den Fakt nur entfernen, wenn WIR ihn gesetzt haben (andere Mods nicht stoeren)
 	if (BBA_Unlimited())
 	{
 		if (!FactsDoesExist("debug_fact_inf_bolts"))
+		{
 			FactsAdd("debug_fact_inf_bolts");
+			FactsAdd("bba_inf_bolts_added");
+		}
 	}
-	else if (FactsDoesExist("debug_fact_inf_bolts"))
+	else if (FactsDoesExist("bba_inf_bolts_added"))
+	{
 		FactsRemove("debug_fact_inf_bolts");
+		FactsRemove("bba_inf_bolts_added");
+	}
 }
 
 function BBA_DefaultBoltName() : name
