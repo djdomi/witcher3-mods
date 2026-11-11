@@ -1,0 +1,14 @@
+name: Cleanup test releases
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for t in bow-and-bolt-adjuster-v1.0.2-test bow-and-bolt-adjuster-v1.0.2-test2; do
+            gh release delete "$t" --repo "$GITHUB_REPOSITORY" --yes --cleanup-tag || true
+          done
