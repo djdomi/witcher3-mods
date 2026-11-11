@@ -3,7 +3,7 @@
 <UserConfig>
 	<Group id="UP_Main" displayName="Unlimited Potions" tags="customDisplayName">
 		<VisibleVars>
-			<Var id="UP_Toxicity" displayName="Potion toxicity" displayType="OPTIONS" tags="nonLocalizedName">
+			<Var id="UP_Toxicity" displayName="Potion toxicity" displayType="OPTIONS" tags="nonLocalizedName;nonLocalized;customNames">
 				<OptionsArray>
 					<Option id="0" displayName="None (default)"/>
 					<Option id="1" displayName="1 per potion"/>

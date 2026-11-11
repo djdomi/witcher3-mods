@@ -1,7 +1,7 @@
-// Unlimited Potions & Decoctions - Witcher 3 Next-Gen (4.0+)
+// Unlimited Potions & Decoctions - The Witcher 3 Remastered (5.0+)
 // https://github.com/djdomi/witcher3-mods - License: AGPL-3.0
 // 1) Traenke ohne Vergiftungs-Limit  2) Alle Absude per Schalter aktiv
-// Schalter: Optionen > Unlimited Potions
+// Schalter: Pausemenue > Unlimited Potions
 
 // Gift-Modus: 0 = kein Gift (Standard), 1 = 1 Punkt pro Trank, 2 = normal wie im Spiel
 function UP_ToxMode() : int
@@ -145,4 +145,94 @@ timer function UP_Tick(dt : float, id : int)
 	if (on || upDecOn != 2)
 		UP_SyncDecoctions(on);
 	if (on) upDecOn = 1; else upDecOn = 2;
+}
+
+// ================= Pausemenue-Eintrag "Unlimited Potions" (5.0) =================
+function UP_SetDefaults(wrapper : CInGameConfigWrapper)
+{
+	if (wrapper.GetVarValue('UP_Main', 'UP_Toxicity') == "")
+		wrapper.SetVarValue('UP_Main', 'UP_Toxicity', "0");
+	if (wrapper.GetVarValue('UP_Main', 'UP_Decoctions') == "")
+		wrapper.SetVarValue('UP_Main', 'UP_Decoctions', "true");
+}
+
+function UP_BuildMenuOptions(storage : CScriptedFlashValueStorage) : CScriptedFlashArray
+{
+	var wrapper : CInGameConfigWrapper;
+	var groupId : int;
+	var i : int;
+	var root : CScriptedFlashObject;
+	var options : CScriptedFlashArray;
+
+	options = storage.CreateTempFlashArray();
+	wrapper = (CInGameConfigWrapper)theGame.GetInGameConfigWrapper();
+	if (!wrapper)
+		return options;
+
+	groupId = -1;
+	for (i = 0; i < wrapper.GetGroupsNum(); i += 1)
+	{
+		if (wrapper.GetGroupName(i) == 'UP_Main')
+			groupId = i;
+	}
+	if (groupId < 0)
+		return options;
+
+	UP_SetDefaults(wrapper);
+
+	root = storage.CreateTempFlashObject();
+	root.SetMemberFlashArray("subElements", options);
+	IngameMenu_FillSubMenuOptionsList(storage, groupId, 'UP_Main', root);
+	return root.GetMemberFlashArray("subElements");
+}
+
+@wrapMethod(IngameMenuStructureCreator)
+function PopulateMenuData() : CScriptedFlashArray
+{
+	var src : CScriptedFlashArray;
+	var dst : CScriptedFlashArray;
+	var menuItem : CScriptedFlashObject;
+	var upItem : CScriptedFlashObject;
+	var i : int;
+	var after : string;
+	var id : string;
+	var placed : bool;
+
+	src = wrappedMethod();
+	if (!parentMenu || parentMenu.isMainMenu)
+		return src;
+
+	upItem = CreateMenuItem("up_menu", "Unlimited Potions", NameToFlashUInt('UPMenu'), IGMActionType_MenuLastHolder, false, "Unlimited Potions");
+	upItem.SetMemberFlashString("label", "Unlimited Potions");
+	upItem.SetMemberFlashString("listTitle", "Unlimited Potions");
+	upItem.SetMemberFlashArray("subElements", UP_BuildMenuOptions(m_flashValueStorage));
+
+	// hinter anderen Mod-Menues einfuegen, sonst hinter "Einstellungen"
+	after = "mainmenu_options";
+	for (i = 0; i < src.GetLength(); i += 1)
+	{
+		menuItem = src.GetElementFlashObject(i);
+		if (!menuItem)
+			continue;
+		id = menuItem.GetMemberFlashString("id");
+		if (id == "wqol_cheats" || id == "bba_menu")
+			after = id;
+	}
+
+	dst = m_flashValueStorage.CreateTempFlashArray();
+	placed = false;
+	for (i = 0; i < src.GetLength(); i += 1)
+	{
+		menuItem = src.GetElementFlashObject(i);
+		dst.PushBackFlashObject(menuItem);
+		if (!placed && menuItem && menuItem.GetMemberFlashString("id") == after)
+		{
+			dst.PushBackFlashObject(upItem);
+			placed = true;
+		}
+	}
+	if (!placed)
+		dst.PushBackFlashObject(upItem);
+
+	return dst;
 }
