@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mod Menu Template - https://github.com/djdomi/witcher3-mods - License: AGPL-3.0 -->
+<UserConfig>
+	<Group id="TPL_Main" displayName="Template Mod" tags="customDisplayName">
+		<VisibleVars>
+			<Var id="TPL_Enabled" displayName="Mod enabled" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="TPL_Message" displayName="Show message after loading" displayType="TOGGLE" tags="nonLocalizedName"/>
+			<Var id="TPL_Sep1" displayName="" displayType="SUBTLE_SEPARATOR"/>
+			<Var id="TPL_Number" displayName="Example slider (1 to 10)" displayType="SLIDER;1;10;9" tags="nonLocalizedName"/>
+			<Var id="TPL_Choice" displayName="Example list" displayType="OPTIONS" tags="nonLocalizedName;nonLocalized;customNames">
+				<OptionsArray>
+					<Option id="0" displayName="Low"/>
+					<Option id="1" displayName="Normal"/>
+					<Option id="2" displayName="High"/>
+				</OptionsArray>
+			</Var>
+		</VisibleVars>
+	</Group>
+</UserConfig>
