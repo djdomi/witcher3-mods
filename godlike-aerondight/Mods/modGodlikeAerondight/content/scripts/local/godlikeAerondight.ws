@@ -226,6 +226,67 @@ function OnClosingMenu()
 	return wrappedMethod();
 }
 
+// ---------- Anzeige im Inventar: eingestellte Werte am Schwert zeigen ----------
+function GA_Line(txt : string) : string
+{
+	return "<br><font color='#FFD700'>" + txt + "</font>";
+}
+
+function GA_FillTooltip(data : CScriptedFlashObject, item : SItemUniqueId, inv : CInventoryComponent)
+{
+	var label, txt : string;
+	var val, boost, lo, hi, m, f : float;
+
+	inv.GetItemPrimaryStat(item, label, val);
+	boost = inv.GetItemModifierFloat(item, 'PermDamageBoost');
+	if (boost > 0) val += boost;
+	m = GA_Mult();
+	lo = GA_MinDmg();
+	hi = GA_MaxDmg();
+	if (hi <= 0) hi = MaxF(val, lo);
+	if (lo <= 0) lo = MinF(val, hi);
+	data.SetMemberFlashNumber("PrimaryStatValue", RoundMath(hi * m));
+
+	txt = data.GetMemberFlashString("Description");
+	txt += "<br>" + GA_Line("Godlike Aerondight");
+	txt += GA_Line("Damage per hit: " + IntToString(RoundMath(lo * m)) + " - " + IntToString(RoundMath(hi * m)));
+	if (m > 1) txt += GA_Line("Damage multiplier: x" + IntToString(RoundMath(m)));
+	f = GA_MonsterMult();
+	if (f > 1) txt += GA_Line("Vs monsters: x" + IntToString(RoundMath(f)));
+	if (GA_Is('GA_FullCharge', true)) txt += GA_Line("Always fully charged");
+	if (GA_Is('GA_AlwaysCrit', true)) txt += GA_Line("Critical hit chance: 100%");
+	if (GA_Is('GA_IgnoreArmor', true)) txt += GA_Line("Ignores armor and resistances");
+	f = GA_LifeSteal();
+	if (f > 0) txt += GA_Line("Life steal: " + IntToString(RoundMath(f * 100)) + "%");
+	f = GA_KillChance();
+	if (f > 0) txt += GA_Line("Instant kill chance: " + IntToString(RoundMath(f * 100)) + "%");
+	f = GA_AreaShare();
+	if (f > 0) txt += GA_Line("Damage to nearby enemies: " + IntToString(RoundMath(f * 100)) + "%");
+	if (GA_Is('GA_Bleeding', true))   txt += GA_Line("Causes bleeding");
+	if (GA_Is('GA_Burning', true))    txt += GA_Line("Sets on fire");
+	if (GA_Is('GA_Poison', true))     txt += GA_Line("Poisons");
+	if (GA_Is('GA_Freeze', false))    txt += GA_Line("Freezes");
+	if (GA_Is('GA_Knockdown', false)) txt += GA_Line("Knocks down");
+	if (GA_Is('GA_Stagger', false))   txt += GA_Line("Staggers");
+	if (GA_Is('GA_Confusion', false)) txt += GA_Line("Confuses");
+	if (GA_Is('GA_Blind', false))     txt += GA_Line("Blinds");
+	if (GA_Is('GA_Slow', false))      txt += GA_Line("Slows down");
+	if (GA_Is('GA_Paralyze', false))  txt += GA_Line("Paralyzes");
+	if (GA_Is('GA_Adrenaline', false)) txt += GA_Line("Adrenaline per hit");
+	if (GA_Is('GA_Stamina', false))   txt += GA_Line("Full stamina per hit");
+	data.SetMemberFlashString("Description", txt);
+}
+
+@wrapMethod(W3TooltipComponent)
+function GetBaseItemData(item : SItemUniqueId, itemInvComponent : CInventoryComponent, optional isShopItem : bool, optional compareWithItem : SItemUniqueId, optional compareItemInv : CInventoryComponent) : CScriptedFlashObject
+{
+	var data : CScriptedFlashObject;
+	data = wrappedMethod(item, itemInvComponent, isShopItem, compareWithItem, compareItemInv);
+	if (data && itemInvComponent && GA_On() && itemInvComponent.ItemHasTag(item, 'Aerondight'))
+		GA_FillTooltip(data, item, itemInvComponent);
+	return data;
+}
+
 // ---------- Mod Menu (gemeinsamer Standard) ----------
 function GA_BuildMenuOptions( storage : CScriptedFlashValueStorage ) : CScriptedFlashArray
 {

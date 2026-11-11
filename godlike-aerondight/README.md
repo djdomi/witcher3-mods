@@ -22,6 +22,8 @@ All bonuses only work for melee hits while Geralt holds Aerondight.
 - **Extra damage vs monsters:** x1 (standard) to x100.
 - **Adrenaline per hit** and **full stamina per hit** (off by default).
 
+- **Shown on the sword:** the inventory tooltip of Aerondight shows the damage and all active bonuses.
+
 ## Settings
 
 In game: pause menu, **Mod Menu**, then **Godlike Aerondight**. "0" on min or max damage means the normal game damage.
@@ -71,6 +73,8 @@ Alle Boni wirken nur bei Nahkampf-Treffern, wenn Geralt Aerondight in der Hand h
 - **Schaden an Gegnern in der Nähe:** aus, 25 %, 50 % oder 100 % des Treffer-Schadens an feindliche Gegner im Umkreis von 4 m.
 - **Extra-Schaden gegen Monster:** x1 (Standard) bis x100.
 - **Adrenalin pro Treffer** und **volle Ausdauer pro Treffer** (standardmäßig aus).
+
+- **Am Schwert sichtbar:** die Inventar-Info von Aerondight zeigt den Schaden und alle aktiven Boni.
 
 ## Einstellungen
 
