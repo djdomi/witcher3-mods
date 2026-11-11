@@ -1,4 +1,5 @@
 // All Skills & Mutations - Witcher 3 Next-Gen (4.0+)
+// https://github.com/djdomi/witcher3-mods - License: AGPL-3.0 (SPDX: AGPL-3.0-only)
 // Alle gelernten Faehigkeiten und alle erforschten Mutationen gleichzeitig aktiv.
 // Schalter: Optionen > Mods > Cheats > All_Skills_Mutations
 

@@ -25,5 +25,6 @@ jobs:
         run: |
           test -d "$MOD" || { echo "Ordner $MOD fehlt"; exit 1; }
           TAG="${MOD}-v${VER}"
+          cp LICENSE "$MOD/LICENSE.txt"
           (cd "$MOD" && zip -r "../${TAG}.zip" . -x "*.md" -x "*.zip")
           gh release create "$TAG" "${TAG}.zip" --target "$GITHUB_SHA" --title "$TAG" --notes-file "$MOD/README.md"
