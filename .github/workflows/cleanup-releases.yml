@@ -1,0 +1,36 @@
+# Loescht alte Releases (und deren Tags). Pro Mod bleibt nur die neueste Version.
+# Start: GitHub > Actions > "Alte Releases loeschen" > Run workflow
+name: Alte Releases loeschen
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Nur neueste Version pro Mod behalten
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh release list -R "$REPO" --limit 500 --json tagName -q '.[].tagName' > tags.txt
+          python3 - <<'PY' > delete.txt
+          import re
+          best = {}
+          tags = [t.strip() for t in open("tags.txt") if t.strip()]
+          for t in tags:
+              m = re.match(r"(.*)-v(\d+)\.(\d+)\.(\d+)$", t)
+              if not m:
+                  continue
+              k, v = m.group(1), tuple(map(int, m.groups()[1:]))
+              if k not in best or v > best[k][0]:
+                  best[k] = (v, t)
+          keep = {b[1] for b in best.values()}
+          for t in tags:
+              if re.match(r".*-v\d+\.\d+\.\d+$", t) and t not in keep:
+                  print(t)
+          PY
+          echo "Wird geloescht:"; cat delete.txt
+          while read -r t; do gh release delete "$t" -R "$REPO" --yes --cleanup-tag; done < delete.txt
+          echo "Bleibt:"; gh release list -R "$REPO" --limit 500
