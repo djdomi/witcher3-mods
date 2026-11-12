@@ -11,7 +11,7 @@ on:
         description: 'Version, z.B. 1.0.0'
         required: true
       prerelease:
-        description: 'Test-Version (Pre-Release, ohne install.bat)'
+        description: 'Test-Version (Pre-Release)'
         type: boolean
         default: false
 permissions:
@@ -31,8 +31,10 @@ jobs:
           test -d "$MOD" || { echo "Ordner $MOD fehlt"; exit 1; }
           TAG="${MOD}-v${VER}"
           cp LICENSE "$MOD/LICENSE.txt"
-          EXTRA=""; FLAG=""
-          if [ "$PRE" = "true" ]; then EXTRA="-x install.bat"; FLAG="--prerelease"; fi
-          (cd "$MOD" && zip -r "../${TAG}.zip" . -x "*.md" -x "*.zip" $EXTRA)
+          FLAG=""
+          if [ "$PRE" = "true" ]; then FLAG="--prerelease"; fi
+          # Regel: niemals .bat/.cmd/.exe/.ps1/.vbs in einer Mod-ZIP (Virenscanner-Fehlalarme)
+          (cd "$MOD" && zip -r "../${TAG}.zip" . -x "*.md" -x "*.zip" -x "*.bat" -x "*.cmd" -x "*.exe" -x "*.ps1" -x "*.vbs")
+          if unzip -Z1 "${TAG}.zip" | grep -qiE '\.(bat|cmd|exe|ps1|vbs)$'; then echo "Verbotene Datei in ZIP"; exit 1; fi
           unzip -l "${TAG}.zip"
           gh release create "$TAG" "${TAG}.zip" $FLAG --target "$GITHUB_SHA" --title "$TAG" --notes-file "$MOD/README.md"
